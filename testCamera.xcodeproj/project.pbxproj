@@ -13,6 +13,13 @@
 		3E3D24BD26B11E0E00F2F3CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */; };
 		3E3D24BF26B11E1100F2F3CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */; };
 		3E3D24C226B11E1200F2F3CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D24C026B11E1200F2F3CC /* LaunchScreen.storyboard */; };
+		3E3D24CB26B11E7F00F2F3CC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */; };
+		3E3D24CC26B11E7F00F2F3CC /* LaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */; };
+		3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24D026B1291F00F2F3CC /* RequestCameraAuthorizationView.swift */; };
+		3E3D24D326B1298000F2F3CC /* RequestCameraAuthorizationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D24D226B1298000F2F3CC /* RequestCameraAuthorizationView.xib */; };
+		3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24D426B181E300F2F3CC /* RequestCameraAuthorizationController.swift */; };
+		3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */; };
+		3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,13 @@
 		3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E3D24C126B11E1200F2F3CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E3D24C326B11E1200F2F3CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchViewController.xib; sourceTree = "<group>"; };
+		3E3D24D026B1291F00F2F3CC /* RequestCameraAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCameraAuthorizationView.swift; sourceTree = "<group>"; };
+		3E3D24D226B1298000F2F3CC /* RequestCameraAuthorizationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestCameraAuthorizationView.xib; sourceTree = "<group>"; };
+		3E3D24D426B181E300F2F3CC /* RequestCameraAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCameraAuthorizationController.swift; sourceTree = "<group>"; };
+		3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationView.swift; sourceTree = "<group>"; };
+		3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMicrophoneAuthorizationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +70,54 @@
 		3E3D24B426B11E0E00F2F3CC /* testCamera */ = {
 			isa = PBXGroup;
 			children = (
+				3E3D24CD26B1281200F2F3CC /* View */,
 				3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */,
 				3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */,
 				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
+				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
+				3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */,
 				3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */,
 				3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */,
 				3E3D24C026B11E1200F2F3CC /* LaunchScreen.storyboard */,
 				3E3D24C326B11E1200F2F3CC /* Info.plist */,
 			);
 			path = testCamera;
+			sourceTree = "<group>";
+		};
+		3E3D24CD26B1281200F2F3CC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3E3D24CE26B1285E00F2F3CC /* Request Authentication */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3E3D24CE26B1285E00F2F3CC /* Request Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				3EB1DD8226B4FF8300082939 /* Microphone */,
+				3E3D24CF26B1287700F2F3CC /* Camera */,
+			);
+			path = "Request Authentication";
+			sourceTree = "<group>";
+		};
+		3E3D24CF26B1287700F2F3CC /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				3E3D24D026B1291F00F2F3CC /* RequestCameraAuthorizationView.swift */,
+				3E3D24D226B1298000F2F3CC /* RequestCameraAuthorizationView.xib */,
+				3E3D24D426B181E300F2F3CC /* RequestCameraAuthorizationController.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		3EB1DD8226B4FF8300082939 /* Microphone */ = {
+			isa = PBXGroup;
+			children = (
+				3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */,
+				3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */,
+			);
+			path = Microphone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,9 +177,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3D24D326B1298000F2F3CC /* RequestCameraAuthorizationView.xib in Resources */,
 				3E3D24C226B11E1200F2F3CC /* LaunchScreen.storyboard in Resources */,
+				3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */,
 				3E3D24BF26B11E1100F2F3CC /* Assets.xcassets in Resources */,
 				3E3D24BD26B11E0E00F2F3CC /* Main.storyboard in Resources */,
+				3E3D24CC26B11E7F00F2F3CC /* LaunchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +195,11 @@
 			files = (
 				3E3D24BA26B11E0E00F2F3CC /* ViewController.swift in Sources */,
 				3E3D24B626B11E0E00F2F3CC /* AppDelegate.swift in Sources */,
+				3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
+				3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */,
+				3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */,
+				3E3D24CB26B11E7F00F2F3CC /* LaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestMicrophoneAuthorizationView" customModule="testCamera" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="YB4-hr-IcA" id="SYK-fC-RVR"/>
+                <outlet property="actionButtonWidhConstant" destination="dFx-0j-o79" id="ZTO-lK-3fS"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="m0T-mr-hmU"/>
+                <outlet property="messageLabel" destination="zD0-uK-eh9" id="r4V-oc-OaO"/>
+                <outlet property="microphoneImageView" destination="R98-nE-KKL" id="vxr-OY-uIm"/>
+                <outlet property="titleLable" destination="ndk-PE-KfZ" id="mJs-In-UfP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R98-nE-KKL">
+                    <rect key="frame" x="177" y="196.5" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="bEO-Re-ULK"/>
+                        <constraint firstAttribute="height" constant="60" id="jo2-07-yr0"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
+                    <rect key="frame" x="83" y="287" width="248" height="26"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need to have the microphone authorization for better experience" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-uK-eh9">
+                    <rect key="frame" x="20" y="329" width="374" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YB4-hr-IcA">
+                    <rect key="frame" x="162" y="400" width="90" height="50"/>
+                    <color key="backgroundColor" systemColor="labelColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="dFx-0j-o79"/>
+                        <constraint firstAttribute="height" constant="50" id="kuR-dJ-I6I"/>
+                    </constraints>
+                    <state key="normal" title="Allow">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="actionButtonHandlerWithBtn:" destination="-1" eventType="touchUpInside" id="lrk-EC-Gpv"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zD0-uK-eh9" secondAttribute="trailing" constant="20" id="75v-Co-w5U"/>
+                <constraint firstItem="ndk-PE-KfZ" firstAttribute="top" secondItem="R98-nE-KKL" secondAttribute="bottom" constant="30" id="Fgm-UL-gd7"/>
+                <constraint firstItem="zD0-uK-eh9" firstAttribute="top" secondItem="ndk-PE-KfZ" secondAttribute="bottom" constant="16" id="HyF-5F-e2W"/>
+                <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KKl-l3-eN6"/>
+                <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Q1i-bN-x4j"/>
+                <constraint firstItem="R98-nE-KKL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ReM-lr-2BB"/>
+                <constraint firstItem="YB4-hr-IcA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="htF-rD-vpt"/>
+                <constraint firstItem="zD0-uK-eh9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="i3D-dM-Etv"/>
+                <constraint firstItem="YB4-hr-IcA" firstAttribute="top" secondItem="zD0-uK-eh9" secondAttribute="bottom" constant="30" id="mlU-PY-Wkh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-12" y="33"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="mic" catalog="system" width="108" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
