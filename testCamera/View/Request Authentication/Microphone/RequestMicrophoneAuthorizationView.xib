@@ -24,14 +24,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R98-nE-KKL">
-                    <rect key="frame" x="177" y="196.5" width="60" height="60"/>
+                    <rect key="frame" x="177" y="197" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="bEO-Re-ULK"/>
                         <constraint firstAttribute="height" constant="60" id="jo2-07-yr0"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
-                    <rect key="frame" x="83" y="287" width="248" height="26"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
+                    <rect key="frame" x="20" y="287.5" width="374" height="25.5"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -60,10 +60,11 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ndk-PE-KfZ" secondAttribute="trailing" constant="20" id="4W2-VB-tNA"/>
                 <constraint firstAttribute="trailing" secondItem="zD0-uK-eh9" secondAttribute="trailing" constant="20" id="75v-Co-w5U"/>
+                <constraint firstItem="ndk-PE-KfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="9ZS-wU-nmn"/>
                 <constraint firstItem="ndk-PE-KfZ" firstAttribute="top" secondItem="R98-nE-KKL" secondAttribute="bottom" constant="30" id="Fgm-UL-gd7"/>
                 <constraint firstItem="zD0-uK-eh9" firstAttribute="top" secondItem="ndk-PE-KfZ" secondAttribute="bottom" constant="16" id="HyF-5F-e2W"/>
-                <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KKl-l3-eN6"/>
                 <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Q1i-bN-x4j"/>
                 <constraint firstItem="R98-nE-KKL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ReM-lr-2BB"/>
                 <constraint firstItem="YB4-hr-IcA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="htF-rD-vpt"/>

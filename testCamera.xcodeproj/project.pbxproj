@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */; };
 		3E3D24B626B11E0E00F2F3CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */; };
 		3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */; };
 		3E3D24BA26B11E0E00F2F3CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24B926B11E0E00F2F3CC /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationController.swift; sourceTree = "<group>"; };
 		3E3D24B226B11E0E00F2F3CC /* testCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */,
 				3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */,
+				3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */,
 			);
 			path = Microphone;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				3E3D24BA26B11E0E00F2F3CC /* ViewController.swift in Sources */,
 				3E3D24B626B11E0E00F2F3CC /* AppDelegate.swift in Sources */,
 				3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */,
+				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
 				3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */,
 				3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */,

@@ -22,7 +22,7 @@ class RequestMicrophoneAuthorizationView: UIView {
     @IBOutlet weak var actionButton: UIButton!
     
     @IBOutlet weak var actionButtonWidhConstant: NSLayoutConstraint!
-    
+    weak var delegate: RequestMicrophoneAuthorizationViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         customInit()
@@ -46,7 +46,7 @@ class RequestMicrophoneAuthorizationView: UIView {
     }
     
     @IBAction func actionButtonHandler(btn: UIButton){
-        
+        delegate?.requestMicrophneAuthorizationActionButtonTapped()
     }
     
     func animateInViews() {
@@ -71,11 +71,13 @@ class RequestMicrophoneAuthorizationView: UIView {
   
         }
         
-        func configurationForErrorState() {
-            titleLable.text = "Camera Authorization Denied"
-            actionButton.setTitle("Open Settings", for: .normal)
-            actionButtonWidhConstant.constant = 120
-        }
+        
+    }
+    
+    func configurationForErrorState() {
+        titleLable.text = "Camera Authorization Denied"
+        actionButton.setTitle("Open Settings", for: .normal)
+        actionButtonWidhConstant.constant = 120
     }
     
 }
