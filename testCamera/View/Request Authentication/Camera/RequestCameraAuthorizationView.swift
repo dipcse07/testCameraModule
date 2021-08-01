@@ -29,6 +29,7 @@ class RequestCameraAuthorizationView: UIView {
           let bundle = Bundle.main
           let nibName = String(describing: Self.self)
           bundle.loadNibNamed(nibName, owner: self, options: nil)
+        
           addSubview(contentView)
           contentView.frame = bounds
           contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

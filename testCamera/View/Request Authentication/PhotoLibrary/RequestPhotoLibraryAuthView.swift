@@ -1,19 +1,21 @@
 //
-//  RequestMicrophoneAuthorizationView.swift
+//  RequestPhotoLibraryAuthView.swift
 //  testCamera
 //
-//  Created by MD SAZID HASAN DIP on 31/7/21.
+//  Created by MD SAZID HASAN DIP on 1/8/21.
 //
 
 import UIKit
-protocol RequestMicrophoneAuthorizationViewDelegate: AnyObject {
-    func requestMicrophneAuthorizationActionButtonTapped()
+
+protocol RequestPhotoLibraryAuthorizationViewDelegate: AnyObject {
+    func requestPhotoLibraryAuthorizationActionButtonTapped()
 }
-class RequestMicrophoneAuthorizationView: UIView {
+
+class RequestPhotoLibraryAuthView: UIView {
 
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var microphoneImageView: UIImageView!
+    @IBOutlet weak var photoLibraryImageView: UIImageView!
     
     @IBOutlet weak var titleLable: UILabel!
     
@@ -51,7 +53,7 @@ class RequestMicrophoneAuthorizationView: UIView {
     }
     
     func animateInViews() {
-        let viewsToAnimate = [microphoneImageView,titleLable,messageLabel,actionButton]
+        let viewsToAnimate = [photoLibraryImageView,titleLable,messageLabel,actionButton]
 
         for (i, viewToAnimate) in viewsToAnimate.enumerated() {
             guard let view = viewToAnimate else {continue}
@@ -60,7 +62,7 @@ class RequestMicrophoneAuthorizationView: UIView {
 
     }
     func animateOutViews(completionHandler: @escaping () -> ()){
-        let viewsToAnimate = [microphoneImageView,titleLable,messageLabel,actionButton]
+        let viewsToAnimate = [photoLibraryImageView,titleLable,messageLabel,actionButton]
 
         for (i, viewToAnimate) in viewsToAnimate.enumerated() {
             guard let view = viewToAnimate else {continue}
@@ -80,6 +82,5 @@ class RequestMicrophoneAuthorizationView: UIView {
         actionButton.setTitle("Open Settings", for: .normal)
         actionButtonWidhConstant.constant = 120
     }
-    
-}
 
+}

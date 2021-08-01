@@ -23,53 +23,65 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R98-nE-KKL">
-                    <rect key="frame" x="177" y="197" width="60" height="60"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuC-mz-AXI">
+                    <rect key="frame" x="0.0" y="44" width="414" height="556"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R98-nE-KKL">
+                            <rect key="frame" x="177" y="151.5" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="bEO-Re-ULK"/>
+                                <constraint firstAttribute="height" constant="60" id="jo2-07-yr0"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
+                            <rect key="frame" x="0.0" y="242" width="374" height="25.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need to have the microphone authorization for better experience" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-uK-eh9">
+                            <rect key="frame" x="20" y="283.5" width="374" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YB4-hr-IcA">
+                            <rect key="frame" x="162" y="354.5" width="90" height="50"/>
+                            <color key="backgroundColor" systemColor="labelColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="dFx-0j-o79"/>
+                                <constraint firstAttribute="height" constant="50" id="kuR-dJ-I6I"/>
+                            </constraints>
+                            <state key="normal" title="Allow">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="actionButtonHandlerWithBtn:" destination="-1" eventType="touchUpInside" id="lrk-EC-Gpv"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="bEO-Re-ULK"/>
-                        <constraint firstAttribute="height" constant="60" id="jo2-07-yr0"/>
+                        <constraint firstAttribute="trailing" secondItem="zD0-uK-eh9" secondAttribute="trailing" constant="20" id="5po-G1-IqW"/>
+                        <constraint firstItem="ndk-PE-KfZ" firstAttribute="leading" secondItem="OuC-mz-AXI" secondAttribute="leading" id="KMF-oi-etr"/>
+                        <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerY" secondItem="OuC-mz-AXI" secondAttribute="centerY" constant="-23.5" id="LSV-Px-YGZ"/>
+                        <constraint firstItem="YB4-hr-IcA" firstAttribute="top" secondItem="zD0-uK-eh9" secondAttribute="bottom" constant="30" id="Ov4-ci-cid"/>
+                        <constraint firstItem="zD0-uK-eh9" firstAttribute="leading" secondItem="OuC-mz-AXI" secondAttribute="leading" constant="20" id="RQd-2S-NGR"/>
+                        <constraint firstAttribute="trailing" secondItem="ndk-PE-KfZ" secondAttribute="trailing" constant="40" id="ZzX-jc-bLC"/>
+                        <constraint firstItem="YB4-hr-IcA" firstAttribute="centerX" secondItem="OuC-mz-AXI" secondAttribute="centerX" id="d7Y-BJ-kpa"/>
+                        <constraint firstItem="ndk-PE-KfZ" firstAttribute="top" secondItem="R98-nE-KKL" secondAttribute="bottom" constant="30" id="g7S-p9-4W8"/>
+                        <constraint firstItem="R98-nE-KKL" firstAttribute="centerX" secondItem="OuC-mz-AXI" secondAttribute="centerX" id="get-Pq-40H"/>
+                        <constraint firstItem="zD0-uK-eh9" firstAttribute="top" secondItem="ndk-PE-KfZ" secondAttribute="bottom" constant="16" id="mqT-mM-vhd"/>
                     </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
-                    <rect key="frame" x="20" y="287.5" width="374" height="25.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need to have the microphone authorization for better experience" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-uK-eh9">
-                    <rect key="frame" x="20" y="329" width="374" height="41"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YB4-hr-IcA">
-                    <rect key="frame" x="162" y="400" width="90" height="50"/>
-                    <color key="backgroundColor" systemColor="labelColor"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="90" id="dFx-0j-o79"/>
-                        <constraint firstAttribute="height" constant="50" id="kuR-dJ-I6I"/>
-                    </constraints>
-                    <state key="normal" title="Allow">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="actionButtonHandlerWithBtn:" destination="-1" eventType="touchUpInside" id="lrk-EC-Gpv"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ndk-PE-KfZ" secondAttribute="trailing" constant="20" id="4W2-VB-tNA"/>
-                <constraint firstAttribute="trailing" secondItem="zD0-uK-eh9" secondAttribute="trailing" constant="20" id="75v-Co-w5U"/>
-                <constraint firstItem="ndk-PE-KfZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="9ZS-wU-nmn"/>
-                <constraint firstItem="ndk-PE-KfZ" firstAttribute="top" secondItem="R98-nE-KKL" secondAttribute="bottom" constant="30" id="Fgm-UL-gd7"/>
-                <constraint firstItem="zD0-uK-eh9" firstAttribute="top" secondItem="ndk-PE-KfZ" secondAttribute="bottom" constant="16" id="HyF-5F-e2W"/>
-                <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Q1i-bN-x4j"/>
-                <constraint firstItem="R98-nE-KKL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ReM-lr-2BB"/>
-                <constraint firstItem="YB4-hr-IcA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="htF-rD-vpt"/>
-                <constraint firstItem="zD0-uK-eh9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="i3D-dM-Etv"/>
-                <constraint firstItem="YB4-hr-IcA" firstAttribute="top" secondItem="zD0-uK-eh9" secondAttribute="bottom" constant="30" id="mlU-PY-Wkh"/>
+                <constraint firstItem="OuC-mz-AXI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="2si-5i-32R"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="OuC-mz-AXI" secondAttribute="bottom" id="3A9-2K-F6U"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OuC-mz-AXI" secondAttribute="trailing" id="IcF-WL-q9b"/>
+                <constraint firstItem="OuC-mz-AXI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="LOX-qx-crF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-12" y="33"/>
