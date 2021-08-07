@@ -23,8 +23,14 @@
 		3E90815F26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E90815E26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib */; };
 		3E90816226B64E3E00CF7AEA /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90816126B64E3E00CF7AEA /* UIView+AddShadow.swift */; };
 		3E90816426B64FEF00CF7AEA /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90816326B64FEF00CF7AEA /* UIView+Animation.swift */; };
+		3E90816626B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90816526B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift */; };
+		3E9D6A6E26B8E8D500EDFECA /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D6A6D26B8E8D500EDFECA /* VideoPreviewView.swift */; };
+		3E9D6A7126B8EB0D00EDFECA /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D6A7026B8EB0D00EDFECA /* CaptureSessionController.swift */; };
 		3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */; };
 		3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */; };
+		3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */; };
+		3EF31B8726B7C72D00CC852C /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF31B8526B7C72D00CC852C /* CaptureViewController.xib */; };
+		3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8826B7C76500CC852C /* AppSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +52,14 @@
 		3E90815E26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestPhotoLibraryAuthView.xib; sourceTree = "<group>"; };
 		3E90816126B64E3E00CF7AEA /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
 		3E90816326B64FEF00CF7AEA /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		3E90816526B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPhotoLibraryAuthController.swift; sourceTree = "<group>"; };
+		3E9D6A6D26B8E8D500EDFECA /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewView.swift; sourceTree = "<group>"; };
+		3E9D6A7026B8EB0D00EDFECA /* CaptureSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
 		3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationView.swift; sourceTree = "<group>"; };
 		3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMicrophoneAuthorizationView.xib; sourceTree = "<group>"; };
+		3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
+		3EF31B8526B7C72D00CC852C /* CaptureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
+		3EF31B8826B7C76500CC852C /* AppSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,17 +92,17 @@
 		3E3D24B426B11E0E00F2F3CC /* testCamera */ = {
 			isa = PBXGroup;
 			children = (
+				3EF31B8326B7C6E200CC852C /* ViewControllers */,
 				3E90816026B64E1900CF7AEA /* Extension */,
 				3E3D24CD26B1281200F2F3CC /* View */,
 				3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */,
 				3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */,
-				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
-				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
 				3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */,
 				3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */,
 				3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */,
 				3E3D24C026B11E1200F2F3CC /* LaunchScreen.storyboard */,
 				3E3D24C326B11E1200F2F3CC /* Info.plist */,
+				3EF31B8826B7C76500CC852C /* AppSetup.swift */,
 			);
 			path = testCamera;
 			sourceTree = "<group>";
@@ -98,6 +110,7 @@
 		3E3D24CD26B1281200F2F3CC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3E9D6A6C26B8E8B100EDFECA /* video Preview */,
 				3E3D24CE26B1285E00F2F3CC /* Request Authentication */,
 			);
 			path = View;
@@ -128,6 +141,7 @@
 			children = (
 				3E90815C26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift */,
 				3E90815E26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib */,
+				3E90816526B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift */,
 			);
 			path = PhotoLibrary;
 			sourceTree = "<group>";
@@ -141,6 +155,24 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		3E9D6A6C26B8E8B100EDFECA /* video Preview */ = {
+			isa = PBXGroup;
+			children = (
+				3E9D6A6D26B8E8D500EDFECA /* VideoPreviewView.swift */,
+			);
+			path = "video Preview";
+			sourceTree = "<group>";
+		};
+		3E9D6A6F26B8EAEC00EDFECA /* CaptureControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */,
+				3EF31B8526B7C72D00CC852C /* CaptureViewController.xib */,
+				3E9D6A7026B8EB0D00EDFECA /* CaptureSessionController.swift */,
+			);
+			path = CaptureControllers;
+			sourceTree = "<group>";
+		};
 		3EB1DD8226B4FF8300082939 /* Microphone */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +181,16 @@
 				3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */,
 			);
 			path = Microphone;
+			sourceTree = "<group>";
+		};
+		3EF31B8326B7C6E200CC852C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E9D6A6F26B8EAEC00EDFECA /* CaptureControllers */,
+				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
+				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +255,7 @@
 				3E3D24C226B11E1200F2F3CC /* LaunchScreen.storyboard in Resources */,
 				3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */,
 				3E3D24BF26B11E1100F2F3CC /* Assets.xcassets in Resources */,
+				3EF31B8726B7C72D00CC852C /* CaptureViewController.xib in Resources */,
 				3E3D24BD26B11E0E00F2F3CC /* Main.storyboard in Resources */,
 				3E3D24CC26B11E7F00F2F3CC /* LaunchViewController.xib in Resources */,
 			);
@@ -229,9 +272,14 @@
 				3E90815D26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift in Sources */,
 				3E90816226B64E3E00CF7AEA /* UIView+AddShadow.swift in Sources */,
 				3E3D24B626B11E0E00F2F3CC /* AppDelegate.swift in Sources */,
+				3E90816626B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift in Sources */,
+				3E9D6A7126B8EB0D00EDFECA /* CaptureSessionController.swift in Sources */,
 				3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */,
 				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
+				3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
+				3E9D6A6E26B8E8D500EDFECA /* VideoPreviewView.swift in Sources */,
+				3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */,
 				3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */,
 				3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */,
 				3E90816426B64FEF00CF7AEA /* UIView+Animation.swift in Sources */,

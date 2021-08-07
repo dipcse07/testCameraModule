@@ -8,6 +8,8 @@
 	<string>This app requires camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Requires Microphone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Requires Photo Library</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

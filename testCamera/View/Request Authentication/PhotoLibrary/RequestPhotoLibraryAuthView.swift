@@ -24,7 +24,7 @@ class RequestPhotoLibraryAuthView: UIView {
     @IBOutlet weak var actionButton: UIButton!
     
     @IBOutlet weak var actionButtonWidhConstant: NSLayoutConstraint!
-    weak var delegate: RequestMicrophoneAuthorizationViewDelegate?
+    weak var delegate: RequestPhotoLibraryAuthorizationViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         customInit()
@@ -49,7 +49,7 @@ class RequestPhotoLibraryAuthView: UIView {
     }
     
     @IBAction func actionButtonHandler(btn: UIButton){
-        delegate?.requestMicrophneAuthorizationActionButtonTapped()
+        delegate?.requestPhotoLibraryAuthorizationActionButtonTapped()
     }
     
     func animateInViews() {
