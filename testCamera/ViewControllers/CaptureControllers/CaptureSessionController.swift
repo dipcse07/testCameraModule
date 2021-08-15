@@ -54,7 +54,10 @@ private extension CaptureSessionController {
     func initializeCaptureSession() {
         guard let captureDevice = getVideoCaptureDevice() else {return}
         guard let captureDeviceInput = getCaptureDeviceInput(captureDevice: captureDevice) else {return}
-        guard captureSession.canAddInput(captureDeviceInput) else {return}
+        guard captureSession.canAddInput(captureDeviceInput) else {
+            print(" can not add input")
+            return}
+        captureSession.addInput(captureDeviceInput)
         captureSession.startRunning()
     }
 }
