@@ -13,6 +13,9 @@ class CaptureViewController: UIViewController {
     @IBOutlet var recordView: RecordView!
     @IBOutlet weak var timerView: TimerView!
     
+    @IBOutlet weak var switchZoomView: SwitchZoomView!
+    
+    
     private lazy var captureSessionController = CaptureSessionController()
     
     private var portraitConstraints = [NSLayoutConstraint]()
@@ -23,6 +26,7 @@ class CaptureViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
         initConstraints()
+        setupSwitchZoomView()
 //        setupTimer()
         
     }
@@ -38,13 +42,13 @@ class CaptureViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print(size)
       
-        hideRecordView()
+        hideViewsBeforeOrientationChange()
         coordinator.animate { context in
             
         } completion: {[weak self] context in
             guard let self = self else { return }
             self.setupOriatationConstraints(size: size)
-            self.showRecordView()
+            self.showViewsAfterDeviceOrientationChanges()
         }
 
     
@@ -55,9 +59,20 @@ class CaptureViewController: UIViewController {
 private extension CaptureViewController {
     func initConstraints() {
         portraitConstraints = [recordView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-                               recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
+                               recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                               switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                               switchZoomView.widthAnchor.constraint(equalToConstant: 160),
+                               switchZoomView.heightAnchor.constraint(equalToConstant: 60),
+                               switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30)
+        
+        ]
         landscapeConstraints = [recordView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-                                recordView.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
+                                recordView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                                switchZoomView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                                switchZoomView.widthAnchor.constraint(equalToConstant: 60),
+                                switchZoomView.heightAnchor.constraint(equalToConstant: 160),
+                                switchZoomView.trailingAnchor.constraint(equalTo: recordView.leadingAnchor, constant: -30)
+        ]
         
         let screenSize = UIScreen.main.bounds.size
         setupOriatationConstraints(size: screenSize )
@@ -67,9 +82,12 @@ private extension CaptureViewController {
         if size.width > size.height {
             NSLayoutConstraint.deactivate(portraitConstraints)
             NSLayoutConstraint.activate(landscapeConstraints)
+            switchZoomView.configureStackViewforLandscapeOrientation()
         }else {
             NSLayoutConstraint.deactivate(landscapeConstraints)
             NSLayoutConstraint.activate(portraitConstraints)
+            switchZoomView.configureStackViewforPortraitOrientation()
+            
             
         }
     }
@@ -84,14 +102,30 @@ private extension CaptureViewController {
         }
     }
     
-    func hideRecordView() {
+    func hideViewsBeforeOrientationChange() {
         recordView.alpha = 0
+        switchZoomView.alpha = 0
     
     }
-    func showRecordView() {
+    func showViewsAfterDeviceOrientationChanges() {
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
             self.recordView.alpha = 1
+            self.switchZoomView.alpha = 1
         }
         animation.startAnimation()
     }
+    
+    func setupSwitchZoomView(){
+        switchZoomView.delegate = self
+    }
+    
+}
+
+
+extension CaptureViewController: SwitchZoomViewDelegate {
+    func switchZoomTapped(state: ZoomState) {
+        print(state)
+    }
+    
+    
 }

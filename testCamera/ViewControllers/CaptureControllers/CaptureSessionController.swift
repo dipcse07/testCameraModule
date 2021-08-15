@@ -10,6 +10,7 @@ import AVFoundation
 
 class CaptureSessionController: NSObject {
     private lazy var captureSession = AVCaptureSession()
+    private var captureDevice:AVCaptureDevice?
     
     override init() {
         super.init()
