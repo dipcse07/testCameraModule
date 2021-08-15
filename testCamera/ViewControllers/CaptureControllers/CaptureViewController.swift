@@ -124,6 +124,7 @@ private extension CaptureViewController {
 
 extension CaptureViewController: SwitchZoomViewDelegate {
     func switchZoomTapped(state: ZoomState) {
+        captureSessionController.setZoomState(zoomState: state)
         print(state)
     }
     
