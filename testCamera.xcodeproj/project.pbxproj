@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */; };
+		3E05EFA226CA4C3E00363E4C /* NotificationName+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */; };
+		3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */; };
 		3E28E95026C8B83E00F5B8DB /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E94F26C8B83E00F5B8DB /* TimerController.swift */; };
 		3E28E95226C8D53300F5B8DB /* UIColor + Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */; };
 		3E28E95526C8D71500F5B8DB /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E95426C8D71500F5B8DB /* SwitchZoomView.swift */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationController.swift; sourceTree = "<group>"; };
+		3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Custom.swift"; sourceTree = "<group>"; };
+		3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOrientationController.swift; sourceTree = "<group>"; };
 		3E28E94F26C8B83E00F5B8DB /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Colors.swift"; sourceTree = "<group>"; };
 		3E28E95426C8D71500F5B8DB /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
@@ -93,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E05EFA326CA6ED700363E4C /* VideoOrientation */ = {
+			isa = PBXGroup;
+			children = (
+				3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */,
+			);
+			path = VideoOrientation;
+			sourceTree = "<group>";
+		};
 		3E28E95326C8D6EE00F5B8DB /* switchZoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,13 +146,13 @@
 				3E90816026B64E1900CF7AEA /* Extension */,
 				3E3D24CD26B1281200F2F3CC /* View */,
 				3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */,
+				3EF31B8826B7C76500CC852C /* AppSetup.swift */,
 				3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */,
 				3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */,
 				3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */,
 				3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */,
 				3E3D24C026B11E1200F2F3CC /* LaunchScreen.storyboard */,
 				3E3D24C326B11E1200F2F3CC /* Info.plist */,
-				3EF31B8826B7C76500CC852C /* AppSetup.swift */,
 			);
 			path = testCamera;
 			sourceTree = "<group>";
@@ -204,6 +216,7 @@
 				3E90816126B64E3E00CF7AEA /* UIView+AddShadow.swift */,
 				3E90816326B64FEF00CF7AEA /* UIView+Animation.swift */,
 				3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */,
+				3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -248,6 +261,7 @@
 		3EF31B8326B7C6E200CC852C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E05EFA326CA6ED700363E4C /* VideoOrientation */,
 				3E9D6A6F26B8EAEC00EDFECA /* CaptureControllers */,
 				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
 				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
@@ -343,8 +357,10 @@
 				3E9D6A7126B8EB0D00EDFECA /* CaptureSessionController.swift in Sources */,
 				3E28E95526C8D71500F5B8DB /* SwitchZoomView.swift in Sources */,
 				3E28E95226C8D53300F5B8DB /* UIColor + Colors.swift in Sources */,
+				3E05EFA226CA4C3E00363E4C /* NotificationName+Custom.swift in Sources */,
 				3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */,
 				3E7D44A326BECD1100D9CA72 /* TimerView.swift in Sources */,
+				3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */,
 				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
 				3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,

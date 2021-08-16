@@ -23,5 +23,8 @@ class AppSetup {
         })
     }
     
+    static var interfaceOrientation: UIInterfaceOrientation? {
+        return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
+    }
     
 }

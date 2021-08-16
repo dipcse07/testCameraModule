@@ -10,6 +10,8 @@ import UIKit
 class CaptureViewController: UIViewController {
 
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
     @IBOutlet var recordView: RecordView!
     @IBOutlet weak var timerView: TimerView!
     
@@ -27,9 +29,11 @@ class CaptureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
+        self.setupVisualEfectView()
         self.initConstraints()
         self.setupToggleCameraView()
         setupCaptureSessionController()
+        registerForApplicationStateNotification()
 //        setupTimer()
         
     }
@@ -37,13 +41,18 @@ class CaptureViewController: UIViewController {
         return .lightContent
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .ApplicationDidBecomeActive,object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ApplicationWillResignActive,object: nil)
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print(size)
       
         hideViewsBeforeOrientationChange()
-        coordinator.animate { context in
-            
+        coordinator.animate { [weak self ] context in
+            guard let self = self else {return}
+            self.setupVideoOrientation()
         } completion: {[weak self] context in
             guard let self = self else { return }
             self.setupOriatationConstraints(size: size)
@@ -155,13 +164,58 @@ private extension CaptureViewController {
             
         })
         self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
-            
-                self.setupSwitchZoomView()
+        self.setupVideoOrientation()
+        self.setupToggleCameraView()
+        self.setupSwitchZoomView()
+       
+        
        
     }
     
     func setupToggleCameraView (){
         self.toggleCameraView.delegate = self
+    }
+    
+    func setupVisualEfectView(){
+        visualEffectView.effect = nil
+    }
+    
+    func registerForApplicationStateNotification() {
+        NotificationCenter.default.addObserver(
+            forName: .ApplicationDidBecomeActive,
+            object: nil,
+            queue: .main)
+        { [weak self ] notification in
+            
+            guard let self = self else {return }
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+                self.visualEffectView.effect = nil
+                
+            }
+            completion: { _ in
+            }
+        }
+        NotificationCenter.default.addObserver(
+            forName: .ApplicationWillResignActive,
+            object: nil,
+            queue: .main)
+        { [weak self ] notification in
+            
+            guard let self = self else {return }
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+                self.visualEffectView.effect = UIBlurEffect(style: .dark )
+                
+            }
+            completion: { _ in
+            }
+        }
+    }
+    
+    func setupVideoOrientation(){
+        guard let interfaceOrientation = AppSetup.interfaceOrientation else {return }
+        guard let videoOrientation = VideoOrientationController.getVideoOrientation(interfaceOrientation: interfaceOrientation) else {return}
+        videoPreviewView.videoPreviewLayer.connection?.videoOrientation = videoOrientation
+        
     }
     
 }

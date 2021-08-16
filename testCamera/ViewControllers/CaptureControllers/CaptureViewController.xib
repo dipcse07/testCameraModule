@@ -16,6 +16,7 @@
                 <outlet property="toggleCameraView" destination="Zzv-gM-kEJ" id="9ur-sp-Aev"/>
                 <outlet property="videoPreviewView" destination="XRn-Ci-qNV" id="1Co-Bx-pZ3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="visualEffectView" destination="wxY-12-Ibi" id="HCK-ci-PQN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,6 +28,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxY-12-Ibi" userLabel="Visual Effect View">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Izx-07-JdU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="324" y="762" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,12 +82,16 @@
                 <constraint firstItem="867-Kt-pPM" firstAttribute="top" secondItem="FnV-b4-6mj" secondAttribute="bottom" constant="30" placeholder="YES" id="9LK-8V-NDm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zzv-gM-kEJ" secondAttribute="trailing" constant="30" placeholder="YES" id="AjX-AM-yAr"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="DfV-9j-2Hg"/>
+                <constraint firstItem="wxY-12-Ibi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F1Y-o6-Z3u"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wxY-12-Ibi" secondAttribute="bottom" id="NST-5P-u0s"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="30" placeholder="YES" id="OFm-lN-Vsh"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPW-ix-RQg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wxY-12-Ibi" secondAttribute="trailing" id="QPu-PI-w2V"/>
                 <constraint firstAttribute="bottom" secondItem="XRn-Ci-qNV" secondAttribute="bottom" id="Soj-ZA-doz"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U8Y-EK-P1n"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
+                <constraint firstItem="wxY-12-Ibi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="lvr-Wa-MrC"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="ziN-WW-yzO"/>
             </constraints>
             <point key="canvasLocation" x="53.623188405797109" y="78.348214285714278"/>
