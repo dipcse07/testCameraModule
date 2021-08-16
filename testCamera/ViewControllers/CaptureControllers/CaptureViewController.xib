@@ -13,6 +13,7 @@
                 <outlet property="recordView" destination="867-Kt-pPM" id="rOL-0u-oDE"/>
                 <outlet property="switchZoomView" destination="FnV-b4-6mj" id="fzF-Vw-HYt"/>
                 <outlet property="timerView" destination="cMm-Gy-wO3" id="WB1-4K-Keq"/>
+                <outlet property="toggleCameraView" destination="Zzv-gM-kEJ" id="9ur-sp-Aev"/>
                 <outlet property="videoPreviewView" destination="XRn-Ci-qNV" id="1Co-Bx-pZ3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,6 +26,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRn-Ci-qNV" userLabel="Video Preview View" customClass="VideoPreviewView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="324" y="762" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="H88-97-G4L"/>
+                        <constraint firstAttribute="height" constant="60" id="xak-Xz-gwl"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-b4-6mj" customClass="SwitchZoomView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="127" y="692" width="160" height="30"/>
@@ -62,12 +71,14 @@
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0eU-s2-Iyp"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2Pa-WF-fDW"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="top" secondItem="FnV-b4-6mj" secondAttribute="bottom" constant="30" placeholder="YES" id="9LK-8V-NDm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zzv-gM-kEJ" secondAttribute="trailing" constant="30" placeholder="YES" id="AjX-AM-yAr"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="DfV-9j-2Hg"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="30" placeholder="YES" id="OFm-lN-Vsh"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPW-ix-RQg"/>
                 <constraint firstAttribute="bottom" secondItem="XRn-Ci-qNV" secondAttribute="bottom" id="Soj-ZA-doz"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U8Y-EK-P1n"/>
+                <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="ziN-WW-yzO"/>
             </constraints>
             <point key="canvasLocation" x="53.623188405797109" y="78.348214285714278"/>
