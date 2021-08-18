@@ -78,6 +78,7 @@ private extension CaptureSessionController {
             return dualCamera
     }
         if let wideAngleCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back){
+            print("returning wide angle camera: " + wideAngleCamera.localizedName)
             return wideAngleCamera
             
         }
@@ -106,12 +107,20 @@ private extension CaptureSessionController {
     }
     
     func initializeCaptureSession(captureDevice: AVCaptureDevice? = nil, completionHandler: @escaping CaptureSessionInitializedCompletionHandler ) {
+          
         
-        var tmpCaptureDevice = captureDevice
+        print("inside initialCaptureSession")
+        var tmpCaptureDevice = self.captureDevice
         if let passedCaptureDevice = captureDevice {
+            print("Got the capture device from initialized method")
             tmpCaptureDevice = passedCaptureDevice
+        }else {
+            print("did not get the camera from initialized method itself")
+//            self.captureDevice = getBackVideoCaptureDevice()
+//            tmpCaptureDevice = self.captureDevice
         }
-        guard let captureDevice = tmpCaptureDevice else {return}
+        guard let captureDevice = tmpCaptureDevice else { print("no back camera or camera detected at initializing capture sessionController")
+            return}
         self.captureDevice = captureDevice
         guard let captureDeviceInput = getCaptureDeviceInput(captureDevice: captureDevice) else {return}
         self.captureDeviceInput = captureDeviceInput
