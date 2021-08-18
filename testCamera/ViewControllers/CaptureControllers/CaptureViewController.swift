@@ -20,7 +20,7 @@ class CaptureViewController: UIViewController {
     @IBOutlet weak var toggleCameraView: ToggleCameraView!
     
     
-    private var captureSessionController: CaptureSessionController!
+    private var captureSessionController = CaptureSessionController()
     
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
@@ -150,24 +150,26 @@ private extension CaptureViewController {
     }
     
     func setupCaptureSessionController() {
-        captureSessionController = CaptureSessionController.init(completionHandler: { [ weak self] in
+        self.captureSessionController.initializeCaptureSession(completionHandler: { [ weak self] in
             guard let self = self else {return }
             
             
-            if let captureSessionCotrollerChecked = self.captureSessionController {
+            if self.captureSessionController != nil {
 
                 print("session is initialized")
+                self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
+                self.setupVideoOrientation()
+                self.setupToggleCameraView()
+                self.setupSwitchZoomView()
+               
+                
 }
             else {
                 print("session is nil because capture sessionController is nill")
             }
             
         })
-        self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
-        self.setupVideoOrientation()
-        self.setupToggleCameraView()
-        self.setupSwitchZoomView()
-       
+
         
        
     }
@@ -231,6 +233,7 @@ extension CaptureViewController: SwitchZoomViewDelegate {
 extension CaptureViewController: ToggleCameraDelegate {
     func toggleCameraButtonTapped() {
         print("toggle camera button Pressed")
+        captureSessionController.toggleCamera()
     }
     
     

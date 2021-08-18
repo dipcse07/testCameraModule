@@ -24,11 +24,17 @@ class CaptureSessionController: NSObject {
     private var zoomState: ZoomState = .wide
     
     
-    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
+//    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
+//        super.init()
+//        captureDevice = getBackVideoCaptureDevice()
+//        initializeCaptureSession(completionHandler: completionHandler)
+//    }
+    
+    override init()  {
         super.init()
-        captureDevice = getBackVideoCaptureDevice()
-        initializeCaptureSession(completionHandler: completionHandler)
+        self.captureDevice = getBackVideoCaptureDevice()
     }
+    
     
     func getCaptureSession() -> AVCaptureSession {
         return captureSession
@@ -56,12 +62,44 @@ class CaptureSessionController: NSObject {
             
             captureSession.removeInput(captureDeviceInput)
         }
-        if let frontCaptureDevice = getFrontVideoCaptureDevice() {
-            initializeCaptureSession(captureDevice: frontCaptureDevice) {
-                
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            if let frontCaptureDevice = self.getFrontVideoCaptureDevice() {
+                self.initializeCaptureSession(captureDevice: frontCaptureDevice) {
+                    
+                }
             }
+
+            
         }
         
+    }
+    
+    func initializeCaptureSession(captureDevice: AVCaptureDevice? = nil, completionHandler: @escaping CaptureSessionInitializedCompletionHandler ) {
+          
+        
+        print("inside initialCaptureSession")
+        var tmpCaptureDevice = self.captureDevice
+        if let passedCaptureDevice = captureDevice {
+            print("Got the capture device from initialized method")
+            tmpCaptureDevice = passedCaptureDevice
+        }else {
+            print("did not get the camera from initialized method itself")
+//            self.captureDevice = getBackVideoCaptureDevice()
+//            tmpCaptureDevice = self.captureDevice
+        }
+        guard let captureDevice = tmpCaptureDevice else { print("no back camera or camera detected at initializing capture sessionController")
+            return}
+        self.captureDevice = captureDevice
+        guard let captureDeviceInput = getCaptureDeviceInput(captureDevice: captureDevice) else {return}
+        self.captureDeviceInput = captureDeviceInput
+        guard captureSession.canAddInput(captureDeviceInput) else {
+            print(" can not add input")
+            return}
+        captureSession.addInput(captureDeviceInput)
+        captureSession.startRunning()
+        setVideoZoomFactor()
+        completionHandler()
     }
     
 }
@@ -106,32 +144,7 @@ private extension CaptureSessionController {
         return nil
     }
     
-    func initializeCaptureSession(captureDevice: AVCaptureDevice? = nil, completionHandler: @escaping CaptureSessionInitializedCompletionHandler ) {
-          
-        
-        print("inside initialCaptureSession")
-        var tmpCaptureDevice = self.captureDevice
-        if let passedCaptureDevice = captureDevice {
-            print("Got the capture device from initialized method")
-            tmpCaptureDevice = passedCaptureDevice
-        }else {
-            print("did not get the camera from initialized method itself")
-//            self.captureDevice = getBackVideoCaptureDevice()
-//            tmpCaptureDevice = self.captureDevice
-        }
-        guard let captureDevice = tmpCaptureDevice else { print("no back camera or camera detected at initializing capture sessionController")
-            return}
-        self.captureDevice = captureDevice
-        guard let captureDeviceInput = getCaptureDeviceInput(captureDevice: captureDevice) else {return}
-        self.captureDeviceInput = captureDeviceInput
-        guard captureSession.canAddInput(captureDeviceInput) else {
-            print(" can not add input")
-            return}
-        captureSession.addInput(captureDeviceInput)
-        captureSession.startRunning()
-        setVideoZoomFactor()
-        completionHandler()
-    }
+    
     
     func setVideoCaptureDeviceZoom(videoZoomFactor: CGFloat, animated: Bool = false, rate: Float = 0){
         
