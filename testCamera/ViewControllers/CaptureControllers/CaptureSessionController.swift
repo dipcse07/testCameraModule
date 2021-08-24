@@ -14,6 +14,11 @@ enum CameraType {
     case telephoto
 }
 
+enum CameraPosition{
+    case front
+    case back
+}
+
 typealias CaptureSessionInitializedCompletionHandler = () -> Void
 
 
@@ -22,8 +27,8 @@ class CaptureSessionController: NSObject {
     private var captureDevice:AVCaptureDevice?
     private var captureDeviceInput:AVCaptureDeviceInput?
     private var zoomState: ZoomState = .wide
-    
-    
+    private var cameraPosition = CameraPosition.back
+
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
 //        captureDevice = getBackVideoCaptureDevice()
@@ -64,13 +69,18 @@ class CaptureSessionController: NSObject {
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            if let frontCaptureDevice = self.getFrontVideoCaptureDevice() {
-                self.initializeCaptureSession(captureDevice: frontCaptureDevice) {
-                    
+            switch self.cameraPosition {
+            case .front:
+                if let backCaptureDevice = self.getBackVideoCaptureDevice() {
+                    self.initializeCaptureSession(captureDevice: backCaptureDevice)
                 }
+                self.cameraPosition = .back
+            case .back:
+                if let frontCaptureDevice = self.getFrontVideoCaptureDevice() {
+                    self.initializeCaptureSession(captureDevice: frontCaptureDevice)
+                }
+                self.cameraPosition = .front
             }
-
-            
         }
         
     }
