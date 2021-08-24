@@ -215,6 +215,7 @@ private extension CaptureViewController {
             }
             completion: { _ in
             }
+            self.captureSessionController.startRunning()
         }
         NotificationCenter.default.addObserver(
             forName: .ApplicationWillResignActive,
@@ -229,6 +230,7 @@ private extension CaptureViewController {
             }
             completion: { _ in
             }
+            self.captureSessionController.stopRunning()
         }
     }
     

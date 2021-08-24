@@ -112,6 +112,14 @@ class CaptureSessionController: NSObject {
         completionHandler?()
     }
     
+    func stopRunning(){
+        captureSession.stopRunning()
+    }
+    
+    func startRunning() {
+        captureSession.startRunning()
+    }
+    
 }
 private extension CaptureSessionController {
     func getBackVideoCaptureDevice() -> AVCaptureDevice? {
@@ -153,8 +161,6 @@ private extension CaptureSessionController {
         }
         return nil
     }
-    
-    
     
     func setVideoCaptureDeviceZoom(videoZoomFactor: CGFloat, animated: Bool = false, rate: Float = 0){
         
