@@ -8,7 +8,7 @@
 import UIKit
 
 class CaptureViewController: UIViewController {
-
+    
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
@@ -30,23 +30,29 @@ class CaptureViewController: UIViewController {
     
     private var shouldHideSwitchZoomView = false
     
- 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
         self.setupVisualEfectView()
-        self.initConstraints()
         self.setupToggleCameraView()
         setupCaptureSessionController()
         registerForApplicationStateNotification()
-//        setupTimer()
+        //        setupTimer()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.initConstraints()
+        showInitialViews()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: .ApplicationDidBecomeActive,object: nil)
         NotificationCenter.default.removeObserver(self, name: .ApplicationWillResignActive,object: nil)
@@ -54,7 +60,7 @@ class CaptureViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print(size)
-      
+        
         hideViewsBeforeOrientationChange()
         coordinator.animate { [weak self ] context in
             guard let self = self else {return}
@@ -64,8 +70,8 @@ class CaptureViewController: UIViewController {
             self.setupOriatationConstraints(size: size)
             self.showViewsAfterDeviceOrientationChanges()
         }
-
-    
+        
+        
     }
 }
 
@@ -74,14 +80,14 @@ private extension CaptureViewController {
     func initConstraints() {
         portraitConstraints = [
             recordView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-                               recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                               switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-                               switchZoomView.heightAnchor.constraint(equalToConstant: 60),
-                               switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30),
-                               toggleCameraView.centerYAnchor.constraint(equalTo: recordView.centerYAnchor),
-                               toggleCameraView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -30)
-        
+            recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            switchZoomView.heightAnchor.constraint(equalToConstant: 60),
+            switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30),
+            toggleCameraView.centerYAnchor.constraint(equalTo: recordView.centerYAnchor),
+            toggleCameraView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -30)
+            
         ]
         
         landscapeConstraints = [recordView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
@@ -133,7 +139,7 @@ private extension CaptureViewController {
     func hideViewsBeforeOrientationChange() {
         recordView.alpha = 0
         switchZoomView.alpha = 0
-    
+        
     }
     func showViewsAfterDeviceOrientationChanges() {
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
@@ -157,12 +163,12 @@ private extension CaptureViewController {
                 switchZoomView.hideTelephotoButton()
                 reduceSwitchZoomViewSize()
             }
-
+            
             if cameraTypes == [.wide] {
                 switchZoomView.isHidden = true
                 self.shouldHideSwitchZoomView = true
             }
-
+            
         }
     }
     
@@ -172,23 +178,19 @@ private extension CaptureViewController {
             
             
             if self.captureSessionController != nil {
-
+                
                 print("session is initialized")
                 self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
                 self.setupVideoOrientation()
                 self.setupToggleCameraView()
                 self.setupSwitchZoomView()
-               
-                
-}
+            }
             else {
                 print("session is nil because capture sessionController is nill")
             }
             
         })
-
         
-       
     }
     
     func setupToggleCameraView (){
@@ -236,13 +238,20 @@ private extension CaptureViewController {
         videoPreviewView.videoPreviewLayer.connection?.videoOrientation = videoOrientation
         
     }
-
+    
     func reduceSwitchZoomViewSize() {
         let delta: CGFloat = 50
         self.switchZommViewWidthConstraint?.constant -= delta
         self.switchZoomViewHeightConstraint?.constant -= delta
     }
     
+    func showInitialViews(){
+        recordView.isHidden = false
+        if shouldHideSwitchZoomView {
+            switchZoomView.isHidden = false
+        }
+        toggleCameraView.isHidden = false
+    }
 }
 
 
@@ -251,7 +260,7 @@ extension CaptureViewController: SwitchZoomViewDelegate {
         captureSessionController.setZoomState(zoomState: state)
         print(state)
     }
-
+    
 }
 extension CaptureViewController: ToggleCameraDelegate {
     func toggleCameraButtonTapped() {
