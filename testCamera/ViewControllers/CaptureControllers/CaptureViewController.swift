@@ -11,13 +11,11 @@ class CaptureViewController: UIViewController {
     
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
     @IBOutlet var recordView: RecordView!
     @IBOutlet weak var timerView: TimerView!
-    
     @IBOutlet weak var switchZoomView: SwitchZoomView!
-    
     @IBOutlet weak var toggleCameraView: ToggleCameraView!
+    @IBOutlet private weak var overlayView: UIView!
     
     
     private var captureSessionController = CaptureSessionController()
@@ -29,9 +27,7 @@ class CaptureViewController: UIViewController {
     private var switchZoomViewHeightConstraint: NSLayoutConstraint?
     
     private var shouldHideSwitchZoomView = false
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
@@ -70,9 +66,9 @@ class CaptureViewController: UIViewController {
             self.setupOriatationConstraints(size: size)
             self.showViewsAfterDeviceOrientationChanges()
         }
-        
-        
     }
+    
+    
 }
 
 
@@ -254,6 +250,13 @@ private extension CaptureViewController {
         }
         toggleCameraView.isHidden = false
     }
+    
+    @IBAction func overlayViewTapHandler(tapGestureRecognizer: UITapGestureRecognizer){
+        let tapView = tapGestureRecognizer.view
+        let tapLocation = tapGestureRecognizer.location(in: tapView)
+        let devicePoint = videoPreviewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: tapLocation)
+        captureSessionController.setFocus(focusMode: .autoFocus, expoesureMode: .autoExpose, atPoint: devicePoint, shouldMonitorSubjectAreaChange: true)
+    }
 }
 
 
@@ -264,10 +267,24 @@ extension CaptureViewController: SwitchZoomViewDelegate {
     }
     
 }
+
 extension CaptureViewController: ToggleCameraDelegate {
     func toggleCameraButtonTapped() {
-        print("toggle camera button Pressed")
-        captureSessionController.toggleCamera()
+        captureSessionController.toggleCamera(completionHandler: {[weak self]cameraPosition in
+            
+            guard let self = self else {return}
+            
+            switch cameraPosition {
+            
+            case .front:
+                self.switchZoomView.isHidden = true
+                
+            case .back:
+                //if !self.shouldHideSwitchZoomView {
+                self.switchZoomView.isHidden = false
+            //}
+            }
+        })
     }
     
     

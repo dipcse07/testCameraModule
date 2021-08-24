@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="testCamera" customModuleProvider="target">
             <connections>
+                <outlet property="overlayView" destination="Ym7-EM-bGG" id="of1-6q-pJs"/>
                 <outlet property="recordView" destination="867-Kt-pPM" id="rOL-0u-oDE"/>
                 <outlet property="switchZoomView" destination="FnV-b4-6mj" id="fzF-Vw-HYt"/>
                 <outlet property="timerView" destination="cMm-Gy-wO3" id="WB1-4K-Keq"/>
@@ -36,6 +37,14 @@
                     </view>
                     <blurEffect style="regular"/>
                 </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ym7-EM-bGG" userLabel="Overlay View">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="igH-NF-8Di" appends="YES" id="5NN-V2-UhB"/>
+                    </connections>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="324" y="762" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,6 +88,7 @@
             <constraints>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0eU-s2-Iyp"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2Pa-WF-fDW"/>
+                <constraint firstItem="Ym7-EM-bGG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2jJ-Hc-pDU"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="top" secondItem="FnV-b4-6mj" secondAttribute="bottom" constant="30" placeholder="YES" id="9LK-8V-NDm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zzv-gM-kEJ" secondAttribute="trailing" constant="30" placeholder="YES" id="AjX-AM-yAr"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="DfV-9j-2Hg"/>
@@ -90,12 +100,20 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wxY-12-Ibi" secondAttribute="trailing" id="QPu-PI-w2V"/>
                 <constraint firstAttribute="bottom" secondItem="XRn-Ci-qNV" secondAttribute="bottom" id="Soj-ZA-doz"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U8Y-EK-P1n"/>
+                <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dcD-J3-VKS"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="obB-Ei-mVw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ym7-EM-bGG" secondAttribute="trailing" id="sc7-rj-AZn"/>
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRW-Cg-9Ly"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="ziN-WW-yzO"/>
             </constraints>
             <point key="canvasLocation" x="53.623188405797109" y="78.348214285714278"/>
         </view>
+        <tapGestureRecognizer id="igH-NF-8Di">
+            <connections>
+                <action selector="overlayViewTapHandlerWithTapGestureRecognizer:" destination="-1" id="KdX-p3-vte"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">

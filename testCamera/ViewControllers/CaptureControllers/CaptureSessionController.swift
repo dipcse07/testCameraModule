@@ -20,6 +20,7 @@ enum CameraPosition{
 }
 
 typealias CaptureSessionInitializedCompletionHandler = () -> Void
+typealias CaptureSessionToggleCompletionHandler = (CameraPosition) -> Void
 
 
 class CaptureSessionController: NSObject {
@@ -62,7 +63,7 @@ class CaptureSessionController: NSObject {
         }
     }
     
-    func toggleCamera(){
+    func toggleCamera(completionHandler: CaptureSessionToggleCompletionHandler? = nil){
         if let captureDeviceInput = captureDeviceInput {
             
             captureSession.removeInput(captureDeviceInput)
@@ -81,6 +82,7 @@ class CaptureSessionController: NSObject {
                 }
                 self.cameraPosition = .front
             }
+            completionHandler?(self.cameraPosition)
         }
         
     }
@@ -106,6 +108,22 @@ class CaptureSessionController: NSObject {
         guard captureSession.canAddInput(captureDeviceInput) else {
             print(" can not add input")
             return}
+        
+        NotificationCenter
+            .default
+            .removeObserver(self,
+                            name: .AVCaptureDeviceSubjectAreaDidChange,
+                            object: captureDevice)
+        
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector:
+                            #selector(subjectAreaDidChangedNotificationHandler(notification:)),
+                         name: .AVCaptureDeviceSubjectAreaDidChange,
+                         object: captureDevice)
+        
+        
         captureSession.addInput(captureDeviceInput)
         captureSession.startRunning()
         setVideoZoomFactor()
@@ -119,7 +137,41 @@ class CaptureSessionController: NSObject {
     func startRunning() {
         captureSession.startRunning()
     }
+    func setFocus(focusMode: AVCaptureDevice.FocusMode,
+                  expoesureMode: AVCaptureDevice.ExposureMode,
+                  atPoint devicePoint: CGPoint,
+                  shouldMonitorSubjectAreaChange: Bool){
+        
+        guard let captureDevice = captureDevice else {return }
+        do {
+            try captureDevice.lockForConfiguration()
+        }catch let error as NSError {
+            print("Failed to get lock for configuration on capture device with error: ", error)
+            return
+        }
+        
+        if captureDevice.isFocusPointOfInterestSupported, captureDevice.isFocusModeSupported(focusMode){
+            
+            captureDevice.focusPointOfInterest = devicePoint
+            captureDevice.focusMode = focusMode
+        }
+        
+        if captureDevice.isExposurePointOfInterestSupported, captureDevice.isExposureModeSupported(expoesureMode){
+            
+            captureDevice.exposurePointOfInterest = devicePoint
+            captureDevice.exposureMode = expoesureMode
+        }
+        
+        captureDevice.isSubjectAreaChangeMonitoringEnabled = shouldMonitorSubjectAreaChange
+        captureDevice.unlockForConfiguration()
+        
+    }
     
+    @objc func subjectAreaDidChangedNotificationHandler(notification: Notification){
+        
+        let devicePoint = CGPoint(x: 0.5, y: 0.5)
+        setFocus(focusMode: .continuousAutoFocus, expoesureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
+    }
 }
 private extension CaptureSessionController {
     func getBackVideoCaptureDevice() -> AVCaptureDevice? {
