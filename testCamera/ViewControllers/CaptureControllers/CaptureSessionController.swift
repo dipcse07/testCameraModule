@@ -75,7 +75,7 @@ class CaptureSessionController: NSObject {
         
     }
     
-    func initializeCaptureSession(captureDevice: AVCaptureDevice? = nil, completionHandler: @escaping CaptureSessionInitializedCompletionHandler ) {
+    func initializeCaptureSession(captureDevice: AVCaptureDevice? = nil, completionHandler: CaptureSessionInitializedCompletionHandler? = nil ) {
           
         
         print("inside initialCaptureSession")
@@ -99,7 +99,7 @@ class CaptureSessionController: NSObject {
         captureSession.addInput(captureDeviceInput)
         captureSession.startRunning()
         setVideoZoomFactor()
-        completionHandler()
+        completionHandler?()
     }
     
 }
