@@ -25,6 +25,12 @@ class CaptureViewController: UIViewController {
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
     private lazy var timerController = TimerController()
+    private var switchZommViewWidthConstraint:NSLayoutConstraint?
+    private var switchZoomViewHeightConstraint: NSLayoutConstraint?
+    
+    private var shouldHideSwitchZoomView = false
+    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +76,7 @@ private extension CaptureViewController {
             recordView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
                                recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                               switchZoomView.widthAnchor.constraint(equalToConstant: 160),
+
                                switchZoomView.heightAnchor.constraint(equalToConstant: 60),
                                switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30),
                                toggleCameraView.centerYAnchor.constraint(equalTo: recordView.centerYAnchor),
@@ -82,11 +88,19 @@ private extension CaptureViewController {
                                 recordView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                                 switchZoomView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                                 switchZoomView.widthAnchor.constraint(equalToConstant: 60),
-                                switchZoomView.heightAnchor.constraint(equalToConstant: 160),
+                                
                                 switchZoomView.trailingAnchor.constraint(equalTo: recordView.leadingAnchor, constant: -30),
                                 toggleCameraView.centerXAnchor.constraint(equalTo: recordView.centerXAnchor),
                                 toggleCameraView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  30)
         ]
+        
+        let switchZoomViewWidthConst =                                switchZoomView.widthAnchor.constraint(equalToConstant: 160)
+        portraitConstraints.append(switchZoomViewWidthConst)
+        self.switchZommViewWidthConstraint = switchZoomViewWidthConst
+        
+        let switchZoomViewHeightConst = switchZoomView.heightAnchor.constraint(equalToConstant: 160)
+        landscapeConstraints.append(switchZoomViewHeightConst)
+        self.switchZoomViewHeightConstraint = switchZoomViewHeightConst
         
         let screenSize = UIScreen.main.bounds.size
         setupOriatationConstraints(size: screenSize )
@@ -136,14 +150,17 @@ private extension CaptureViewController {
             if cameraTypes.filter({ $0 == .ultrawide
             }).isEmpty {
                 switchZoomView.hideUltraWidButton()
+                reduceSwitchZoomViewSize()
             }
             if cameraTypes.filter({ $0 == .telephoto
             }).isEmpty {
                 switchZoomView.hideTelephotoButton()
+                reduceSwitchZoomViewSize()
             }
 
             if cameraTypes == [.wide] {
-                switchZoomView.alpha = 0
+                switchZoomView.isHidden = true
+                self.shouldHideSwitchZoomView = true
             }
 
         }
@@ -218,6 +235,12 @@ private extension CaptureViewController {
         guard let videoOrientation = VideoOrientationController.getVideoOrientation(interfaceOrientation: interfaceOrientation) else {return}
         videoPreviewView.videoPreviewLayer.connection?.videoOrientation = videoOrientation
         
+    }
+
+    func reduceSwitchZoomViewSize() {
+        let delta: CGFloat = 50
+        self.switchZommViewWidthConstraint?.constant -= delta
+        self.switchZoomViewHeightConstraint?.constant -= delta
     }
     
 }
