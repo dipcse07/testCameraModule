@@ -162,6 +162,15 @@
 			path = PointOfInterest;
 			sourceTree = "<group>";
 		};
+		3E36CBB726D5F56C0068DA55 /* LaunchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
+				3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */,
+			);
+			path = LaunchViewController;
+			sourceTree = "<group>";
+		};
 		3E3D24A926B11E0E00F2F3CC = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +196,7 @@
 				3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */,
 				3EF31B8826B7C76500CC852C /* AppSetup.swift */,
 				3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */,
-				3E3D24CA26B11E7F00F2F3CC /* LaunchViewController.xib */,
+				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
 				3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */,
 				3E3D24BE26B11E1100F2F3CC /* Assets.xcassets */,
 				3E3D24C026B11E1200F2F3CC /* LaunchScreen.storyboard */,
@@ -303,10 +312,9 @@
 		3EF31B8326B7C6E200CC852C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E36CBB726D5F56C0068DA55 /* LaunchViewController */,
 				3E05EFA326CA6ED700363E4C /* VideoOrientation */,
 				3E9D6A6F26B8EAEC00EDFECA /* CaptureControllers */,
-				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
-				3E3D24C926B11E7F00F2F3CC /* LaunchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
