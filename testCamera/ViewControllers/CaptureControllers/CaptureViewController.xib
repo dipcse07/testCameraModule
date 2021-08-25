@@ -10,11 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="testCamera" customModuleProvider="target">
             <connections>
+                <outlet property="alertView" destination="nec-pI-30w" id="9HX-1d-Sbl"/>
                 <outlet property="overlayView" destination="Ym7-EM-bGG" id="of1-6q-pJs"/>
+                <outlet property="pointOFInterestView" destination="ItX-jK-DXv" id="bhp-FV-J7G"/>
                 <outlet property="recordView" destination="867-Kt-pPM" id="rOL-0u-oDE"/>
                 <outlet property="switchZoomView" destination="FnV-b4-6mj" id="fzF-Vw-HYt"/>
                 <outlet property="timerView" destination="cMm-Gy-wO3" id="WB1-4K-Keq"/>
                 <outlet property="toggleCameraView" destination="Zzv-gM-kEJ" id="9ur-sp-Aev"/>
+                <outlet property="torchView" destination="ccF-e5-Yq9" id="Np4-er-glW"/>
                 <outlet property="videoPreviewView" destination="XRn-Ci-qNV" id="1Co-Bx-pZ3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visualEffectView" destination="wxY-12-Ibi" id="HCK-ci-PQN"/>
@@ -45,30 +48,6 @@
                         <outletCollection property="gestureRecognizers" destination="igH-NF-8Di" appends="YES" id="5NN-V2-UhB"/>
                     </connections>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
-                    <rect key="frame" x="324" y="762" width="60" height="60"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="H88-97-G4L"/>
-                        <constraint firstAttribute="height" constant="60" id="xak-Xz-gwl"/>
-                    </constraints>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-b4-6mj" customClass="SwitchZoomView" customModule="testCamera" customModuleProvider="target">
-                    <rect key="frame" x="127" y="692" width="160" height="30"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" placeholder="YES" id="2xa-gI-vfU"/>
-                        <constraint firstAttribute="width" constant="160" placeholder="YES" id="pSc-2d-0m4"/>
-                    </constraints>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="867-Kt-pPM" userLabel="Record View" customClass="RecordView" customModule="testCamera" customModuleProvider="target">
-                    <rect key="frame" x="167" y="752" width="80" height="80"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="52U-p7-9dY"/>
-                        <constraint firstAttribute="width" constant="80" id="fBB-OH-5gX"/>
-                    </constraints>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-Gy-wO3" userLabel="Timer View" customClass="TimerView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="157" y="74" width="100" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,6 +60,54 @@
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccF-e5-Yq9" userLabel="Torch View" customClass="TorchView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="30" y="74" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="TEg-5J-Gu3"/>
+                        <constraint firstAttribute="height" constant="60" id="y1p-b2-aX8"/>
+                    </constraints>
+                </view>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nec-pI-30w" userLabel="Alert View" customClass="AlertView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="107" y="602" width="200" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" placeholder="YES" id="Ntw-aB-eeQ"/>
+                        <constraint firstAttribute="height" constant="60" placeholder="YES" id="YhT-G2-RhU"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-b4-6mj" customClass="SwitchZoomView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="127" y="692" width="160" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" placeholder="YES" id="2xa-gI-vfU"/>
+                        <constraint firstAttribute="width" constant="160" placeholder="YES" id="pSc-2d-0m4"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="324" y="762" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="H88-97-G4L"/>
+                        <constraint firstAttribute="height" constant="60" id="xak-Xz-gwl"/>
+                    </constraints>
+                </view>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ItX-jK-DXv" customClass="PointOfInterest" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="167" y="408" width="80" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="5Ac-3z-gTt"/>
+                        <constraint firstAttribute="width" constant="80" id="ANc-B2-QlN"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="867-Kt-pPM" userLabel="Record View" customClass="RecordView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="167" y="752" width="80" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="52U-p7-9dY"/>
+                        <constraint firstAttribute="width" constant="80" id="fBB-OH-5gX"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -95,14 +122,20 @@
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F1Y-o6-Z3u"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
                 <constraint firstAttribute="bottom" secondItem="wxY-12-Ibi" secondAttribute="bottom" id="KNV-dZ-9MN"/>
+                <constraint firstItem="ItX-jK-DXv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="NmX-3j-P67"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="30" placeholder="YES" id="OFm-lN-Vsh"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPW-ix-RQg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wxY-12-Ibi" secondAttribute="trailing" id="QPu-PI-w2V"/>
                 <constraint firstAttribute="bottom" secondItem="XRn-Ci-qNV" secondAttribute="bottom" id="Soj-ZA-doz"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U8Y-EK-P1n"/>
+                <constraint firstItem="ccF-e5-Yq9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="XWO-ea-547"/>
+                <constraint firstItem="ItX-jK-DXv" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" placeholder="YES" id="bI7-Zm-L93"/>
                 <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dcD-J3-VKS"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
+                <constraint firstItem="FnV-b4-6mj" firstAttribute="top" secondItem="nec-pI-30w" secondAttribute="bottom" constant="30" id="hR4-n9-nE9"/>
+                <constraint firstItem="nec-pI-30w" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nUG-yk-Q9L"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="obB-Ei-mVw"/>
+                <constraint firstItem="ccF-e5-Yq9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="ppF-ew-00J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ym7-EM-bGG" secondAttribute="trailing" id="sc7-rj-AZn"/>
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRW-Cg-9Ly"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="ziN-WW-yzO"/>

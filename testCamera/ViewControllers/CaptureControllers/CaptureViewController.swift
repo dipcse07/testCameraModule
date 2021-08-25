@@ -11,8 +11,11 @@ class CaptureViewController: UIViewController {
     
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    @IBOutlet var recordView: RecordView!
+    @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var timerView: TimerView!
+    @IBOutlet weak var torchView: TorchView!
+    @IBOutlet weak var alertView: AlertView!
+    @IBOutlet weak var pointOFInterestView: PointOfInterest!
     @IBOutlet weak var switchZoomView: SwitchZoomView!
     @IBOutlet weak var toggleCameraView: ToggleCameraView!
     @IBOutlet private weak var overlayView: UIView!
@@ -27,10 +30,15 @@ class CaptureViewController: UIViewController {
     private var switchZoomViewHeightConstraint: NSLayoutConstraint?
     
     private var shouldHideSwitchZoomView = false
+    private var hideAlertViewWorkItem: DispatchWorkItem?
+    
+    private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
+    private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
+        self.setupTorchView()
         self.setupVisualEfectView()
         self.setupToggleCameraView()
         setupCaptureSessionController()
@@ -252,10 +260,86 @@ private extension CaptureViewController {
     }
     
     @IBAction func overlayViewTapHandler(tapGestureRecognizer: UITapGestureRecognizer){
-        let tapView = tapGestureRecognizer.view
+        guard let tapView = tapGestureRecognizer.view else {return}
+        
         let tapLocation = tapGestureRecognizer.location(in: tapView)
+        let newLocation = tapView.convert(tapLocation, to: view)
+        self.showPointOfInterestViewAtPoint(point: newLocation)
         let devicePoint = videoPreviewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: tapLocation)
         captureSessionController.setFocus(focusMode: .autoFocus, expoesureMode: .autoExpose, atPoint: devicePoint, shouldMonitorSubjectAreaChange: true)
+    }
+    
+    func showAndHideAlertView(text:String){
+        showAlertView(text: text )
+        let hideAlertViewWorkItem  = DispatchWorkItem { [weak self] in
+            guard let self = self else {return}
+            self.hideAlertView()
+            
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: hideAlertViewWorkItem)
+        self.hideAlertViewWorkItem = hideAlertViewWorkItem
+        
+    }
+    
+    func showAlertView(text:String){
+        self.hideAlertViewWorkItem?.cancel()
+        self.hideAlertViewWorkItem = nil
+        alertView.alpha = 0
+        alertView.setAlertText(text: text)
+        alertView.transform = CGAffineTransform(translationX: 0, y: 30)
+        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.alertView.transform = .identity
+            self.alertView.alpha = 1.0
+        }
+        animation.startAnimation()
+    }
+    
+    func hideAlertView() {
+        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.alertView.transform =  CGAffineTransform(translationX: 0, y: 30)
+            self.alertView.alpha = 0
+        }
+        animation.startAnimation()
+    }
+    
+    func setupTorchView() {
+        torchView.delegate = self
+    }
+    
+    func showPointOfInterestViewAtPoint(point:CGPoint){
+        pointOfInterestHalfCompletedWorkItem = nil
+        pointOfInterestCompleteWorkItem = nil
+        pointOFInterestView.center = point
+        pointOFInterestView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.pointOFInterestView.transform = .identity
+            self.pointOFInterestView.alpha = 1.0
+        }
+        animation.startAnimation()
+        
+        let pointOfInterestHalfCompletedWorkItem = DispatchWorkItem {
+            [weak self] in
+            guard let self = self else {return}
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+                self.pointOFInterestView.alpha = 0.5
+            }
+            animation.startAnimation()
+        }
+        
+        let pointOfInterestCompletedWorkItem = DispatchWorkItem {
+            [weak self] in
+            guard let self = self else {return}
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+                self.pointOFInterestView.alpha = 0
+            }
+            animation.startAnimation()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: pointOfInterestHalfCompletedWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: pointOfInterestCompletedWorkItem)
+        
+        self.pointOfInterestHalfCompletedWorkItem = pointOfInterestHalfCompletedWorkItem
+        self.pointOfInterestCompleteWorkItem = pointOfInterestCompletedWorkItem
     }
 }
 
@@ -278,13 +362,35 @@ extension CaptureViewController: ToggleCameraDelegate {
             
             case .front:
                 self.switchZoomView.isHidden = true
-                
+                self.torchView.isHidden = true
             case .back:
                 //if !self.shouldHideSwitchZoomView {
                 self.switchZoomView.isHidden = false
+                self.torchView.isHidden = false
             //}
             }
         })
+    }
+
+}
+
+extension CaptureViewController: TorchViewDelegate {
+    func torchTapped(torchMode: TorchMode, completionHandler: (Bool) -> Void ) {
+        switch torchMode {
+        
+        case .on:
+           let result =  captureSessionController.turnOfTorch()
+            if !result {
+                showAndHideAlertView(text: "Could not turn off the camera")
+            }
+            completionHandler(result)
+        case .off:
+           let result = captureSessionController.turnOnTorch()
+            if !result {
+                showAndHideAlertView(text: "Could not turn on the camera")
+            }
+            completionHandler(result)
+        }
     }
     
     

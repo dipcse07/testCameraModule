@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TorchView" customModule="testCamera" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="QvT-aX-EoV"/>
+                <outlet property="torchButton" destination="QtQ-wy-hYT" id="WNo-7p-XAh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QtQ-wy-hYT" userLabel="Torch Button">
+                    <rect key="frame" x="10" y="10" width="40" height="40"/>
+                    <color key="backgroundColor" name="BackgroundAlpha60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="lJa-KG-ZDX"/>
+                        <constraint firstAttribute="height" constant="40" id="q8s-xa-W5K"/>
+                    </constraints>
+                    <color key="tintColor" name="TextOnBackGroundAlpha"/>
+                    <state key="normal" image="bolt.fill" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="torchButtoPressed:" destination="-1" eventType="touchUpInside" id="Ys3-x9-FBJ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QtQ-wy-hYT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="NPk-Pz-43T"/>
+                <constraint firstAttribute="trailing" secondItem="QtQ-wy-hYT" secondAttribute="trailing" constant="10" id="RDx-n5-W6Z"/>
+                <constraint firstItem="QtQ-wy-hYT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="XLv-4W-nxE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="QtQ-wy-hYT" secondAttribute="bottom" constant="10" id="Yc4-NX-u9u"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-154" y="-85"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bolt.fill" catalog="system" width="101" height="128"/>
+        <namedColor name="BackgroundAlpha60">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextOnBackGroundAlpha">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

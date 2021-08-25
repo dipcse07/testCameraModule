@@ -29,6 +29,7 @@ class CaptureSessionController: NSObject {
     private var captureDeviceInput:AVCaptureDeviceInput?
     private var zoomState: ZoomState = .wide
     private var cameraPosition = CameraPosition.back
+    private var previousZoomState = ZoomState.wide
 
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
@@ -76,12 +77,17 @@ class CaptureSessionController: NSObject {
                     self.initializeCaptureSession(captureDevice: backCaptureDevice)
                 }
                 self.cameraPosition = .back
+                self.zoomState = self.previousZoomState
+                self.setVideoZoomFactor()
             case .back:
+                self.previousZoomState = self.zoomState
+                self.zoomState = .wide
                 if let frontCaptureDevice = self.getFrontVideoCaptureDevice() {
                     self.initializeCaptureSession(captureDevice: frontCaptureDevice)
                 }
                 self.cameraPosition = .front
             }
+            self.resetFocus()
             completionHandler?(self.cameraPosition)
         }
         
@@ -172,6 +178,13 @@ class CaptureSessionController: NSObject {
         let devicePoint = CGPoint(x: 0.5, y: 0.5)
         setFocus(focusMode: .continuousAutoFocus, expoesureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
     }
+    func turnOnTorch() -> Bool {
+        return setTorchMode(torchMode: .on)
+    }
+    func turnOfTorch() -> Bool {
+        return setTorchMode(torchMode: .off)
+    }
+    
 }
 private extension CaptureSessionController {
     func getBackVideoCaptureDevice() -> AVCaptureDevice? {
@@ -273,5 +286,23 @@ private extension CaptureSessionController {
     func setVideoZoomFactor() {
         let videoZoomFactor = getVideoZoomFactor()
         setVideoCaptureDeviceZoom(videoZoomFactor: videoZoomFactor)
+    }
+    
+    func setTorchMode(torchMode: AVCaptureDevice.TorchMode) -> Bool {
+        guard let captureDevice = captureDevice else {return false}
+        do {
+            try captureDevice.lockForConfiguration()
+        } catch let error as NSError {
+            print("Failed to get lock for configuration device with error: ", error)
+        }
+        guard captureDevice.isTorchAvailable else {return false }
+        captureDevice.torchMode = torchMode
+        captureDevice.unlockForConfiguration()
+        return true
+    }
+    
+    func resetFocus() {
+        let devicePoint = CGPoint(x: 0.5, y:0.5)
+        setFocus(focusMode: .continuousAutoFocus, expoesureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
     }
 }
