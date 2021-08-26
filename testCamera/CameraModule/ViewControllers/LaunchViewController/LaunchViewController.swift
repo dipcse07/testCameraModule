@@ -73,7 +73,7 @@ class LaunchViewController: UIViewController {
         
         print("Show Capture View Controller")
         DispatchQueue.main.async {
-            AppSetup.loadCaptureViewController()
+            CameraModuleSetup.loadCaptureViewController()
         }
 
     }

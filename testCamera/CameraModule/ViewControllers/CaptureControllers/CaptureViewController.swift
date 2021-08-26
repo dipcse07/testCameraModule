@@ -248,7 +248,7 @@ private extension CaptureViewController {
     }
     
     func setupVideoOrientation(){
-        guard let interfaceOrientation = AppSetup.interfaceOrientation else {return }
+        guard let interfaceOrientation = CameraModuleSetup.interfaceOrientation else {return }
         guard let videoOrientation = VideoOrientationController.getVideoOrientation(interfaceOrientation: interfaceOrientation) else {return}
         videoPreviewView.videoPreviewLayer.connection?.videoOrientation = videoOrientation
         
@@ -374,9 +374,7 @@ extension CaptureViewController: ToggleCameraDelegate {
         captureSessionController.toggleCamera(completionHandler: {[weak self]cameraPosition in
             
             guard let self = self else {return}
-            
             switch cameraPosition {
-            
             case .front:
                 self.switchZoomView.isHidden = true
                 self.torchView.isHidden = true

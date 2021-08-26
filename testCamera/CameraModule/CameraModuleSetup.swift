@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AppSetup {
+class CameraModuleSetup {
     static func loadCaptureViewController () {
         let nibName = String(describing: CaptureViewController.self)
         let bundle = Bundle.main

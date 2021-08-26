@@ -54,7 +54,7 @@
 		3EEED38026C80AD80042122C /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EEED37F26C80AD80042122C /* RecordView.xib */; };
 		3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */; };
 		3EF31B8726B7C72D00CC852C /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF31B8526B7C72D00CC852C /* CaptureViewController.xib */; };
-		3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8826B7C76500CC852C /* AppSetup.swift */; };
+		3EF31B8926B7C76500CC852C /* CameraModuleSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8826B7C76500CC852C /* CameraModuleSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +107,7 @@
 		3EEED37F26C80AD80042122C /* RecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3EF31B8526B7C72D00CC852C /* CaptureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
-		3EF31B8826B7C76500CC852C /* AppSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetup.swift; sourceTree = "<group>"; };
+		3EF31B8826B7C76500CC852C /* CameraModuleSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModuleSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,11 +202,8 @@
 		3E3D24B426B11E0E00F2F3CC /* testCamera */ = {
 			isa = PBXGroup;
 			children = (
-				3EF31B8326B7C6E200CC852C /* ViewControllers */,
-				3E90816026B64E1900CF7AEA /* Extension */,
-				3E3D24CD26B1281200F2F3CC /* View */,
+				3ED91F9026D83E88005EEC53 /* CameraModule */,
 				3E3D24B526B11E0E00F2F3CC /* AppDelegate.swift */,
-				3EF31B8826B7C76500CC852C /* AppSetup.swift */,
 				3E3D24B726B11E0E00F2F3CC /* SceneDelegate.swift */,
 				3E3D24B926B11E0E00F2F3CC /* ViewController.swift */,
 				3E3D24BB26B11E0E00F2F3CC /* Main.storyboard */,
@@ -342,6 +339,17 @@
 			path = Microphone;
 			sourceTree = "<group>";
 		};
+		3ED91F9026D83E88005EEC53 /* CameraModule */ = {
+			isa = PBXGroup;
+			children = (
+				3EF31B8326B7C6E200CC852C /* ViewControllers */,
+				3E90816026B64E1900CF7AEA /* Extension */,
+				3E3D24CD26B1281200F2F3CC /* View */,
+				3EF31B8826B7C76500CC852C /* CameraModuleSetup.swift */,
+			);
+			path = CameraModule;
+			sourceTree = "<group>";
+		};
 		3EEED37C26C80AA80042122C /* RecordView */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,7 +468,7 @@
 				3E7D44A326BECD1100D9CA72 /* TimerView.swift in Sources */,
 				3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */,
 				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
-				3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */,
+				3EF31B8926B7C76500CC852C /* CameraModuleSetup.swift in Sources */,
 				3E8002B326D7CB06006A6A1D /* ToggleCaptureButtonView.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
 				3E9D6A6E26B8E8D500EDFECA /* VideoPreviewView.swift in Sources */,
