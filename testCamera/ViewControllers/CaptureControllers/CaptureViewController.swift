@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import AVFoundation
+import Photos
 class CaptureViewController: UIViewController {
     
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
@@ -18,31 +19,37 @@ class CaptureViewController: UIViewController {
     @IBOutlet weak var pointOFInterestView: PointOfInterest!
     @IBOutlet weak var switchZoomView: SwitchZoomView!
     @IBOutlet weak var toggleCameraView: ToggleCameraView!
+    @IBOutlet weak var imageCaptureView: ImageCaptureView!
+    
+    @IBOutlet weak var toggleCaptureButtonView: ToggleCaptureButtonView!
+    
     @IBOutlet private weak var overlayView: UIView!
     
     
     private var captureSessionController = CaptureSessionController()
+    private let photoOutput = AVCapturePhotoOutput()
     
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
     private lazy var timerController = TimerController()
     private var switchZommViewWidthConstraint:NSLayoutConstraint?
     private var switchZoomViewHeightConstraint: NSLayoutConstraint?
-    
     private var shouldHideSwitchZoomView = false
     private var hideAlertViewWorkItem: DispatchWorkItem?
-    
     private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
     private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor  = .blue
         self.setupTorchView()
+        self.setupToggleCaptureModeView()
         self.setupVisualEfectView()
+        self.setupImageCaptureView()
         self.setupToggleCameraView()
-        setupCaptureSessionController()
-        registerForApplicationStateNotification()
+        self.setupCaptureSessionController()
+        self.registerForApplicationStateNotification()
         //        setupTimer()
         
     }
@@ -76,11 +83,13 @@ class CaptureViewController: UIViewController {
         }
     }
     
+   
     
 }
 
 
 private extension CaptureViewController {
+    
     func initConstraints() {
         portraitConstraints = [
             recordView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
@@ -306,6 +315,14 @@ private extension CaptureViewController {
         torchView.delegate = self
     }
     
+    func setupToggleCaptureModeView() {
+        toggleCaptureButtonView.delegate = self
+    }
+    
+    func setupImageCaptureView(){
+        self.imageCaptureView.imageCaptureViewDelegate = self
+    }
+    
     func showPointOfInterestViewAtPoint(point:CGPoint){
         pointOfInterestHalfCompletedWorkItem = nil
         pointOfInterestCompleteWorkItem = nil
@@ -392,6 +409,32 @@ extension CaptureViewController: TorchViewDelegate {
             completionHandler(result)
         }
     }
+}
+
+extension CaptureViewController: ToggleCaptureButtonViewDelegate {
+    func toggleCaptureButtonTapped(captureMode: CaptureMode, completionHandler: (Bool) -> Void) {
+        switch captureMode {
+        case .photo:
+            print(captureMode)
+            self.imageCaptureView.isHidden = false
+            self.recordView.isHidden = true
+            completionHandler(true)
+        case .video:
+            print(captureMode)
+            self.imageCaptureView.isHidden = true
+            self.recordView.isHidden =  false
+            completionHandler(true)
+        }
+    }
+}
+
+extension CaptureViewController:ImageCaptureViewDelegate {
+    func capturedImagedPassed(image: UIImage?) {
+        
+    }
     
+    func captureImageViewTapped() {
+        self.captureSessionController.handleTakePhoto(uiViewController: self)
+    }
     
 }

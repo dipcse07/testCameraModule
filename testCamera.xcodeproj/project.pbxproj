@@ -35,6 +35,11 @@
 		3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D24D426B181E300F2F3CC /* RequestCameraAuthorizationController.swift */; };
 		3E7D44A326BECD1100D9CA72 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D44A226BECD1100D9CA72 /* TimerView.swift */; };
 		3E7D44A526BECD2200D9CA72 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7D44A426BECD2200D9CA72 /* TimerView.xib */; };
+		3E8002B026D7C72B006A6A1D /* PhotoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8002AF26D7C72B006A6A1D /* PhotoPreviewView.swift */; };
+		3E8002B326D7CB06006A6A1D /* ToggleCaptureButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8002B226D7CB06006A6A1D /* ToggleCaptureButtonView.swift */; };
+		3E8002B526D7CB17006A6A1D /* ToggleCaptureButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8002B426D7CB17006A6A1D /* ToggleCaptureButtonView.xib */; };
+		3E8002B826D7E50C006A6A1D /* ImageCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8002B726D7E50C006A6A1D /* ImageCaptureView.swift */; };
+		3E8002BA26D7E520006A6A1D /* ImageCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8002B926D7E520006A6A1D /* ImageCaptureView.xib */; };
 		3E90815D26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90815C26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift */; };
 		3E90815F26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E90815E26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib */; };
 		3E90816226B64E3E00CF7AEA /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90816126B64E3E00CF7AEA /* UIView+AddShadow.swift */; };
@@ -44,6 +49,7 @@
 		3E9D6A7126B8EB0D00EDFECA /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D6A7026B8EB0D00EDFECA /* CaptureSessionController.swift */; };
 		3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */; };
 		3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */; };
+		3ED91F8F26D7F498005EEC53 /* ImageCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED91F8E26D7F498005EEC53 /* ImageCaptureController.swift */; };
 		3EEED37E26C80AC30042122C /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEED37D26C80AC30042122C /* RecordView.swift */; };
 		3EEED38026C80AD80042122C /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EEED37F26C80AD80042122C /* RecordView.xib */; };
 		3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */; };
@@ -82,6 +88,11 @@
 		3E3D24D426B181E300F2F3CC /* RequestCameraAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCameraAuthorizationController.swift; sourceTree = "<group>"; };
 		3E7D44A226BECD1100D9CA72 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3E7D44A426BECD2200D9CA72 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
+		3E8002AF26D7C72B006A6A1D /* PhotoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewView.swift; sourceTree = "<group>"; };
+		3E8002B226D7CB06006A6A1D /* ToggleCaptureButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCaptureButtonView.swift; sourceTree = "<group>"; };
+		3E8002B426D7CB17006A6A1D /* ToggleCaptureButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCaptureButtonView.xib; sourceTree = "<group>"; };
+		3E8002B726D7E50C006A6A1D /* ImageCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureView.swift; sourceTree = "<group>"; };
+		3E8002B926D7E520006A6A1D /* ImageCaptureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCaptureView.xib; sourceTree = "<group>"; };
 		3E90815C26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPhotoLibraryAuthView.swift; sourceTree = "<group>"; };
 		3E90815E26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestPhotoLibraryAuthView.xib; sourceTree = "<group>"; };
 		3E90816126B64E3E00CF7AEA /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
@@ -91,6 +102,7 @@
 		3E9D6A7026B8EB0D00EDFECA /* CaptureSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
 		3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationView.swift; sourceTree = "<group>"; };
 		3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMicrophoneAuthorizationView.xib; sourceTree = "<group>"; };
+		3ED91F8E26D7F498005EEC53 /* ImageCaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureController.swift; sourceTree = "<group>"; };
 		3EEED37D26C80AC30042122C /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		3EEED37F26C80AD80042122C /* RecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +220,9 @@
 		3E3D24CD26B1281200F2F3CC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3E8002B626D7E4AE006A6A1D /* ImageCaptureView */,
+				3E8002B126D7CABA006A6A1D /* ToggleCaptureButtonView */,
+				3E8002AE26D7C6F3006A6A1D /* PhotoPreviewView */,
 				3E36CBB226D5EC130068DA55 /* PointOfInterest */,
 				3E294F3326D5501B00867BA7 /* Tourch */,
 				3E294F2E26D52E5B00867BA7 /* Alert */,
@@ -249,6 +264,33 @@
 				3E28E94F26C8B83E00F5B8DB /* TimerController.swift */,
 			);
 			path = TimerView;
+			sourceTree = "<group>";
+		};
+		3E8002AE26D7C6F3006A6A1D /* PhotoPreviewView */ = {
+			isa = PBXGroup;
+			children = (
+				3E8002AF26D7C72B006A6A1D /* PhotoPreviewView.swift */,
+			);
+			path = PhotoPreviewView;
+			sourceTree = "<group>";
+		};
+		3E8002B126D7CABA006A6A1D /* ToggleCaptureButtonView */ = {
+			isa = PBXGroup;
+			children = (
+				3E8002B226D7CB06006A6A1D /* ToggleCaptureButtonView.swift */,
+				3E8002B426D7CB17006A6A1D /* ToggleCaptureButtonView.xib */,
+			);
+			path = ToggleCaptureButtonView;
+			sourceTree = "<group>";
+		};
+		3E8002B626D7E4AE006A6A1D /* ImageCaptureView */ = {
+			isa = PBXGroup;
+			children = (
+				3E8002B726D7E50C006A6A1D /* ImageCaptureView.swift */,
+				3E8002B926D7E520006A6A1D /* ImageCaptureView.xib */,
+				3ED91F8E26D7F498005EEC53 /* ImageCaptureController.swift */,
+			);
+			path = ImageCaptureView;
 			sourceTree = "<group>";
 		};
 		3E90815A26B6497200CF7AEA /* PhotoLibrary */ = {
@@ -386,11 +428,13 @@
 				3EEED38026C80AD80042122C /* RecordView.xib in Resources */,
 				3E3D24BF26B11E1100F2F3CC /* Assets.xcassets in Resources */,
 				3EF31B8726B7C72D00CC852C /* CaptureViewController.xib in Resources */,
+				3E8002B526D7CB17006A6A1D /* ToggleCaptureButtonView.xib in Resources */,
 				3E3D24BD26B11E0E00F2F3CC /* Main.storyboard in Resources */,
 				3E294F3226D539AD00867BA7 /* AlertView.xib in Resources */,
 				3E3D24CC26B11E7F00F2F3CC /* LaunchViewController.xib in Resources */,
 				3E28E95726C8D72200F5B8DB /* SwitchZoomView.xib in Resources */,
 				3E28E95C26C966E100F5B8DB /* ToggleCameraView.xib in Resources */,
+				3E8002BA26D7E520006A6A1D /* ImageCaptureView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,10 +461,14 @@
 				3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */,
 				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
 				3EF31B8926B7C76500CC852C /* AppSetup.swift in Sources */,
+				3E8002B326D7CB06006A6A1D /* ToggleCaptureButtonView.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
 				3E9D6A6E26B8E8D500EDFECA /* VideoPreviewView.swift in Sources */,
 				3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */,
+				3ED91F8F26D7F498005EEC53 /* ImageCaptureController.swift in Sources */,
 				3E294F3526D5503700867BA7 /* TorchView.swift in Sources */,
+				3E8002B826D7E50C006A6A1D /* ImageCaptureView.swift in Sources */,
+				3E8002B026D7C72B006A6A1D /* PhotoPreviewView.swift in Sources */,
 				3E28E95026C8B83E00F5B8DB /* TimerController.swift in Sources */,
 				3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */,
 				3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */,

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToggleCaptureButtonView" customModule="testCamera" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="six-pj-VWB"/>
+                <outlet property="toggleCaptureButton" destination="jXP-VD-24o" id="Dmh-O8-FGE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Content View">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXP-VD-24o" userLabel="Capture Toggle Button">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="torchButtoPressed:" destination="-1" eventType="touchUpInside" id="jku-Os-TAB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="jXP-VD-24o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ap9-Qt-8iA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jXP-VD-24o" secondAttribute="bottom" id="XvF-Gz-5HT"/>
+                <constraint firstItem="jXP-VD-24o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bwa-8F-MHb"/>
+                <constraint firstAttribute="trailing" secondItem="jXP-VD-24o" secondAttribute="trailing" id="xN0-F1-EVD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="56"/>
+        </view>
+    </objects>
+</document>

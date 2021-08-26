@@ -7,6 +7,8 @@
 
 import Foundation
 import AVFoundation
+import Photos
+import UIKit
 
 enum CameraType {
     case ultrawide
@@ -22,7 +24,6 @@ enum CameraPosition{
 typealias CaptureSessionInitializedCompletionHandler = () -> Void
 typealias CaptureSessionToggleCompletionHandler = (CameraPosition) -> Void
 
-
 class CaptureSessionController: NSObject {
     private lazy var captureSession = AVCaptureSession()
     private var captureDevice:AVCaptureDevice?
@@ -30,6 +31,9 @@ class CaptureSessionController: NSObject {
     private var zoomState: ZoomState = .wide
     private var cameraPosition = CameraPosition.back
     private var previousZoomState = ZoomState.wide
+    private let photoOutput = AVCapturePhotoOutput()
+    var captureImage: UIImage?
+    private var refferedViewController: UIViewController?
 
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
@@ -45,6 +49,12 @@ class CaptureSessionController: NSObject {
     
     func getCaptureSession() -> AVCaptureSession {
         return captureSession
+    }
+    
+    func getCapturedImage() -> UIImage? {
+        guard let previewImage = captureImage else {return nil}
+        return previewImage
+        
     }
     
     func setZoomState(zoomState: ZoomState){
@@ -129,11 +139,22 @@ class CaptureSessionController: NSObject {
                          name: .AVCaptureDeviceSubjectAreaDidChange,
                          object: captureDevice)
         
-        
+        if captureSession.canAddOutput(photoOutput) {
+            captureSession.addOutput(photoOutput)
+        }else {print("could not add output for photo Output")}
         captureSession.addInput(captureDeviceInput)
         captureSession.startRunning()
         setVideoZoomFactor()
         completionHandler?()
+    }
+    
+    @objc public func handleTakePhoto(uiViewController: UIViewController) {
+        let photoSettings = AVCapturePhotoSettings()
+        if let photoPreviewType = photoSettings.availablePreviewPhotoPixelFormatTypes.first {
+            photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoPreviewType]
+            self.refferedViewController = uiViewController
+            photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        }
     }
     
     func stopRunning(){
@@ -304,5 +325,17 @@ private extension CaptureSessionController {
     func resetFocus() {
         let devicePoint = CGPoint(x: 0.5, y:0.5)
         setFocus(focusMode: .continuousAutoFocus, expoesureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
+    }
+}
+
+
+extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let imageData = photo.fileDataRepresentation() else { return }
+        let previewImage = UIImage(data: imageData)
+        self.captureImage = previewImage
+        let photoPreviewContainer = PhotoPreviewView(frame: self.refferedViewController!.view.frame)
+        photoPreviewContainer.photoImageView.image = previewImage
+        self.refferedViewController!.view.addSubview(photoPreviewContainer)        
     }
 }

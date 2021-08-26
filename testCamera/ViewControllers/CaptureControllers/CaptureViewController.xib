@@ -11,12 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="testCamera" customModuleProvider="target">
             <connections>
                 <outlet property="alertView" destination="nec-pI-30w" id="9HX-1d-Sbl"/>
+                <outlet property="imageCaptureView" destination="7Ut-cy-4SV" id="Iv7-jB-EXY"/>
                 <outlet property="overlayView" destination="Ym7-EM-bGG" id="of1-6q-pJs"/>
                 <outlet property="pointOFInterestView" destination="ItX-jK-DXv" id="bhp-FV-J7G"/>
                 <outlet property="recordView" destination="867-Kt-pPM" id="rOL-0u-oDE"/>
                 <outlet property="switchZoomView" destination="FnV-b4-6mj" id="fzF-Vw-HYt"/>
                 <outlet property="timerView" destination="cMm-Gy-wO3" id="WB1-4K-Keq"/>
                 <outlet property="toggleCameraView" destination="Zzv-gM-kEJ" id="9ur-sp-Aev"/>
+                <outlet property="toggleCaptureButtonView" destination="JfR-EA-r2W" id="8h1-lA-d4X"/>
                 <outlet property="torchView" destination="ccF-e5-Yq9" id="Np4-er-glW"/>
                 <outlet property="videoPreviewView" destination="XRn-Ci-qNV" id="1Co-Bx-pZ3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -101,6 +103,18 @@
                         <constraint firstAttribute="width" constant="80" id="ANc-B2-QlN"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfR-EA-r2W" userLabel="Toggle Capture Mode View" customClass="ToggleCaptureButtonView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="63" y="772" width="80" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Dq3-MD-Dtb"/>
+                        <constraint firstAttribute="width" constant="80" id="Sfs-D4-eZO"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-cy-4SV" userLabel="Image Capture View" customClass="ImageCaptureView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="167" y="752" width="80" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="867-Kt-pPM" userLabel="Record View" customClass="RecordView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="167" y="752" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,24 +130,30 @@
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0eU-s2-Iyp"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2Pa-WF-fDW"/>
                 <constraint firstItem="Ym7-EM-bGG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2jJ-Hc-pDU"/>
+                <constraint firstItem="JfR-EA-r2W" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="-20" id="7GJ-fT-oBC"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="top" secondItem="FnV-b4-6mj" secondAttribute="bottom" constant="30" placeholder="YES" id="9LK-8V-NDm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zzv-gM-kEJ" secondAttribute="trailing" constant="30" placeholder="YES" id="AjX-AM-yAr"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="DfV-9j-2Hg"/>
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F1Y-o6-Z3u"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
                 <constraint firstAttribute="bottom" secondItem="wxY-12-Ibi" secondAttribute="bottom" id="KNV-dZ-9MN"/>
+                <constraint firstItem="867-Kt-pPM" firstAttribute="leading" secondItem="JfR-EA-r2W" secondAttribute="trailing" constant="24" id="LKY-MD-Led"/>
                 <constraint firstItem="ItX-jK-DXv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="NmX-3j-P67"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="30" placeholder="YES" id="OFm-lN-Vsh"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPW-ix-RQg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wxY-12-Ibi" secondAttribute="trailing" id="QPu-PI-w2V"/>
                 <constraint firstAttribute="bottom" secondItem="XRn-Ci-qNV" secondAttribute="bottom" id="Soj-ZA-doz"/>
                 <constraint firstItem="XRn-Ci-qNV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U8Y-EK-P1n"/>
+                <constraint firstItem="7Ut-cy-4SV" firstAttribute="leading" secondItem="867-Kt-pPM" secondAttribute="leading" id="XRn-xT-dFI"/>
                 <constraint firstItem="ccF-e5-Yq9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="XWO-ea-547"/>
+                <constraint firstItem="7Ut-cy-4SV" firstAttribute="top" secondItem="867-Kt-pPM" secondAttribute="top" id="YIv-1q-vrB"/>
                 <constraint firstItem="ItX-jK-DXv" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" placeholder="YES" id="bI7-Zm-L93"/>
+                <constraint firstItem="7Ut-cy-4SV" firstAttribute="trailing" secondItem="867-Kt-pPM" secondAttribute="trailing" id="cDC-kn-yl4"/>
                 <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dcD-J3-VKS"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="top" secondItem="nec-pI-30w" secondAttribute="bottom" constant="30" id="hR4-n9-nE9"/>
                 <constraint firstItem="nec-pI-30w" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nUG-yk-Q9L"/>
+                <constraint firstItem="7Ut-cy-4SV" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" id="ndA-Gi-Acp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="obB-Ei-mVw"/>
                 <constraint firstItem="ccF-e5-Yq9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="ppF-ew-00J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ym7-EM-bGG" secondAttribute="trailing" id="sc7-rj-AZn"/>
