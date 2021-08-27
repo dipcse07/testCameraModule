@@ -316,6 +316,7 @@ private extension CaptureViewController {
         self.galleryView.delegate = self
     }
     func setupImageCaptureView(){
+        self.imageCaptureView.isHidden = false
         self.imageCaptureView.imageCaptureViewDelegate = self
     }
     

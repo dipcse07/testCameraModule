@@ -20,10 +20,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0J-Et-3Sn">
-                    <rect key="frame" x="10" y="10" width="40" height="40"/>
+                    <rect key="frame" x="15" y="15" width="30" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="BvM-e3-bYw"/>
+                        <constraint firstAttribute="height" constant="30" id="TeL-i9-2kE"/>
+                    </constraints>
                     <color key="tintColor" name="TextOnBackGroundAlpha"/>
-                    <state key="normal" image="photo" catalog="system"/>
+                    <state key="normal" image="photo.fill.on.rectangle.fill" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="galleryButtonHandlerWithSender:" destination="-1" eventType="touchUpInside" id="VuQ-mc-1Wa"/>
                     </connections>
@@ -32,17 +41,15 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="E0J-Et-3Sn" secondAttribute="trailing" constant="10" id="I8a-11-ULH"/>
-                <constraint firstItem="E0J-Et-3Sn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Ofg-8D-zFN"/>
-                <constraint firstItem="E0J-Et-3Sn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Zgj-C8-k6d"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="E0J-Et-3Sn" secondAttribute="bottom" constant="10" id="hBc-Xa-zYP"/>
+                <constraint firstItem="E0J-Et-3Sn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ScW-3G-Y9t"/>
+                <constraint firstItem="E0J-Et-3Sn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wBj-iD-0RK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="64" y="45"/>
         </view>
     </objects>
     <resources>
-        <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="photo.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <namedColor name="TextOnBackGroundAlpha">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
