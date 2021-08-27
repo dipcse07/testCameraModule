@@ -59,9 +59,6 @@ private extension ImageCaptureView {
         containerView.layer.borderWidth = 4.0
         containerView.layer.borderColor =  UIColor.white.cgColor
     }
-    
-    
-    
 }
     
     

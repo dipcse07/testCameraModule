@@ -50,6 +50,9 @@
 		3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */; };
 		3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */; };
 		3ED91F8F26D7F498005EEC53 /* ImageCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED91F8E26D7F498005EEC53 /* ImageCaptureController.swift */; };
+		3ED91F9226D8AE08005EEC53 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED91F9126D8AE08005EEC53 /* UIViewController+Extension.swift */; };
+		3ED91F9526D8AF51005EEC53 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED91F9426D8AF51005EEC53 /* GalleryView.swift */; };
+		3ED91F9726D8AF60005EEC53 /* GalleryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED91F9626D8AF60005EEC53 /* GalleryView.xib */; };
 		3EEED37E26C80AC30042122C /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEED37D26C80AC30042122C /* RecordView.swift */; };
 		3EEED38026C80AD80042122C /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EEED37F26C80AD80042122C /* RecordView.xib */; };
 		3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */; };
@@ -103,6 +106,9 @@
 		3EB1DD8326B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationView.swift; sourceTree = "<group>"; };
 		3EB1DD8526B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMicrophoneAuthorizationView.xib; sourceTree = "<group>"; };
 		3ED91F8E26D7F498005EEC53 /* ImageCaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureController.swift; sourceTree = "<group>"; };
+		3ED91F9126D8AE08005EEC53 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		3ED91F9426D8AF51005EEC53 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		3ED91F9626D8AF60005EEC53 /* GalleryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryView.xib; sourceTree = "<group>"; };
 		3EEED37D26C80AC30042122C /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		3EEED37F26C80AD80042122C /* RecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		3EF31B8426B7C72D00CC852C /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 		3E3D24CD26B1281200F2F3CC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3ED91F9326D8AE95005EEC53 /* GalleryView */,
 				3E8002B626D7E4AE006A6A1D /* ImageCaptureView */,
 				3E8002B126D7CABA006A6A1D /* ToggleCaptureButtonView */,
 				3E8002AE26D7C6F3006A6A1D /* PhotoPreviewView */,
@@ -307,6 +314,7 @@
 				3E90816326B64FEF00CF7AEA /* UIView+Animation.swift */,
 				3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */,
 				3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */,
+				3ED91F9126D8AE08005EEC53 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -348,6 +356,15 @@
 				3EF31B8826B7C76500CC852C /* CameraModuleSetup.swift */,
 			);
 			path = CameraModule;
+			sourceTree = "<group>";
+		};
+		3ED91F9326D8AE95005EEC53 /* GalleryView */ = {
+			isa = PBXGroup;
+			children = (
+				3ED91F9426D8AF51005EEC53 /* GalleryView.swift */,
+				3ED91F9626D8AF60005EEC53 /* GalleryView.xib */,
+			);
+			path = GalleryView;
 			sourceTree = "<group>";
 		};
 		3EEED37C26C80AA80042122C /* RecordView */ = {
@@ -437,6 +454,7 @@
 				3E3D24BF26B11E1100F2F3CC /* Assets.xcassets in Resources */,
 				3EF31B8726B7C72D00CC852C /* CaptureViewController.xib in Resources */,
 				3E8002B526D7CB17006A6A1D /* ToggleCaptureButtonView.xib in Resources */,
+				3ED91F9726D8AF60005EEC53 /* GalleryView.xib in Resources */,
 				3E3D24BD26B11E0E00F2F3CC /* Main.storyboard in Resources */,
 				3E294F3226D539AD00867BA7 /* AlertView.xib in Resources */,
 				3E3D24CC26B11E7F00F2F3CC /* LaunchViewController.xib in Resources */,
@@ -453,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ED91F9226D8AE08005EEC53 /* UIViewController+Extension.swift in Sources */,
 				3E3D24BA26B11E0E00F2F3CC /* ViewController.swift in Sources */,
 				3EEED37E26C80AC30042122C /* RecordView.swift in Sources */,
 				3E90815D26B649E000CF7AEA /* RequestPhotoLibraryAuthView.swift in Sources */,
@@ -471,6 +490,7 @@
 				3EF31B8926B7C76500CC852C /* CameraModuleSetup.swift in Sources */,
 				3E8002B326D7CB06006A6A1D /* ToggleCaptureButtonView.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
+				3ED91F9526D8AF51005EEC53 /* GalleryView.swift in Sources */,
 				3E9D6A6E26B8E8D500EDFECA /* VideoPreviewView.swift in Sources */,
 				3EF31B8626B7C72D00CC852C /* CaptureViewController.swift in Sources */,
 				3ED91F8F26D7F498005EEC53 /* ImageCaptureController.swift in Sources */,

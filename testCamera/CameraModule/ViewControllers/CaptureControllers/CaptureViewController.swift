@@ -14,20 +14,20 @@ class CaptureViewController: UIViewController {
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var timerView: TimerView!
+    @IBOutlet weak var galleryView: GalleryView!
     @IBOutlet weak var torchView: TorchView!
     @IBOutlet weak var alertView: AlertView!
     @IBOutlet weak var pointOFInterestView: PointOfInterest!
     @IBOutlet weak var switchZoomView: SwitchZoomView!
     @IBOutlet weak var toggleCameraView: ToggleCameraView!
     @IBOutlet weak var imageCaptureView: ImageCaptureView!
-    
     @IBOutlet weak var toggleCaptureButtonView: ToggleCaptureButtonView!
-    
     @IBOutlet private weak var overlayView: UIView!
     
     
     private var captureSessionController = CaptureSessionController()
     private let photoOutput = AVCapturePhotoOutput()
+    private var imagePickerController = UIImagePickerController()
     
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
@@ -38,7 +38,7 @@ class CaptureViewController: UIViewController {
     private var hideAlertViewWorkItem: DispatchWorkItem?
     private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
     private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,7 @@ class CaptureViewController: UIViewController {
         self.setupToggleCaptureModeView()
         self.setupVisualEfectView()
         self.setupImageCaptureView()
+        self.setupGalleryView()
         self.setupToggleCameraView()
         self.setupCaptureSessionController()
         self.registerForApplicationStateNotification()
@@ -71,7 +72,6 @@ class CaptureViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print(size)
-        
         hideViewsBeforeOrientationChange()
         coordinator.animate { [weak self ] context in
             guard let self = self else {return}
@@ -83,10 +83,7 @@ class CaptureViewController: UIViewController {
         }
     }
     
-   
-    
 }
-
 
 private extension CaptureViewController {
     
@@ -188,10 +185,7 @@ private extension CaptureViewController {
     func setupCaptureSessionController() {
         self.captureSessionController.initializeCaptureSession(completionHandler: { [ weak self] in
             guard let self = self else {return }
-            
-            
             if self.captureSessionController != nil {
-                
                 print("session is initialized")
                 self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
                 self.setupVideoOrientation()
@@ -318,7 +312,9 @@ private extension CaptureViewController {
     func setupToggleCaptureModeView() {
         toggleCaptureButtonView.delegate = self
     }
-    
+    func setupGalleryView(){
+        self.galleryView.delegate = self
+    }
     func setupImageCaptureView(){
         self.imageCaptureView.imageCaptureViewDelegate = self
     }
@@ -386,7 +382,7 @@ extension CaptureViewController: ToggleCameraDelegate {
             }
         })
     }
-
+    
 }
 
 extension CaptureViewController: TorchViewDelegate {
@@ -394,13 +390,13 @@ extension CaptureViewController: TorchViewDelegate {
         switch torchMode {
         
         case .on:
-           let result =  captureSessionController.turnOfTorch()
+            let result =  captureSessionController.turnOfTorch()
             if !result {
                 showAndHideAlertView(text: "Could not turn off the camera")
             }
             completionHandler(result)
         case .off:
-           let result = captureSessionController.turnOnTorch()
+            let result = captureSessionController.turnOnTorch()
             if !result {
                 showAndHideAlertView(text: "Could not turn on the camera")
             }
@@ -433,6 +429,34 @@ extension CaptureViewController:ImageCaptureViewDelegate {
     
     func captureImageViewTapped() {
         self.captureSessionController.handleTakePhoto(uiViewController: self)
+    }
+}
+
+extension CaptureViewController: GalaryViewDelegate {
+    func galleryButtonTapped() {
+        self.imagePickerController.sourceType = .photoLibrary
+        self.imagePickerController.delegate = self
+        self.imagePickerController.mediaTypes = ["public.image", "public.movie"]
+        self.present(self.imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            //            self.galleryButton.contentMode = .scaleAspectFit
+            //            self.galleryButton.setImage( pickedImage, for: .normal)
+            self.galleryView.setGalleryButtonImage(image: pickedImage)
+        }
+        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            print("videoURL:\(String(describing: videoURL))")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

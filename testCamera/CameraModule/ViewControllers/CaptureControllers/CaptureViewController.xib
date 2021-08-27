@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="testCamera" customModuleProvider="target">
             <connections>
                 <outlet property="alertView" destination="nec-pI-30w" id="9HX-1d-Sbl"/>
+                <outlet property="galleryView" destination="alJ-nu-rss" id="9D4-yE-jiy"/>
                 <outlet property="imageCaptureView" destination="7Ut-cy-4SV" id="Iv7-jB-EXY"/>
                 <outlet property="overlayView" destination="Ym7-EM-bGG" id="of1-6q-pJs"/>
                 <outlet property="pointOFInterestView" destination="ItX-jK-DXv" id="bhp-FV-J7G"/>
@@ -104,14 +105,22 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfR-EA-r2W" userLabel="Toggle Capture Mode View" customClass="ToggleCaptureButtonView" customModule="testCamera" customModuleProvider="target">
-                    <rect key="frame" x="63" y="772" width="80" height="40"/>
+                    <rect key="frame" x="81" y="772" width="70" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Dq3-MD-Dtb"/>
-                        <constraint firstAttribute="width" constant="80" id="Sfs-D4-eZO"/>
+                        <constraint firstAttribute="width" constant="70" id="Sfs-D4-eZO"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-cy-4SV" userLabel="Image Capture View" customClass="ImageCaptureView" customModule="testCamera" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alJ-nu-rss" userLabel="GalleryView" customClass="GalleryView" customModule="testCamera" customModuleProvider="target">
+                    <rect key="frame" x="13" y="762" width="60" height="60"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="jf1-vp-j9a"/>
+                        <constraint firstAttribute="width" constant="60" id="zxy-bT-MGQ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-cy-4SV" userLabel="Image Capture View" customClass="ImageCaptureView" customModule="testCamera" customModuleProvider="target">
                     <rect key="frame" x="167" y="752" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -137,7 +146,7 @@
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F1Y-o6-Z3u"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
                 <constraint firstAttribute="bottom" secondItem="wxY-12-Ibi" secondAttribute="bottom" id="KNV-dZ-9MN"/>
-                <constraint firstItem="867-Kt-pPM" firstAttribute="leading" secondItem="JfR-EA-r2W" secondAttribute="trailing" constant="24" id="LKY-MD-Led"/>
+                <constraint firstItem="867-Kt-pPM" firstAttribute="leading" secondItem="JfR-EA-r2W" secondAttribute="trailing" constant="16" id="LKY-MD-Led"/>
                 <constraint firstItem="ItX-jK-DXv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="NmX-3j-P67"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" constant="30" placeholder="YES" id="OFm-lN-Vsh"/>
                 <constraint firstItem="cMm-Gy-wO3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPW-ix-RQg"/>
@@ -152,6 +161,8 @@
                 <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dcD-J3-VKS"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="top" secondItem="nec-pI-30w" secondAttribute="bottom" constant="30" id="hR4-n9-nE9"/>
+                <constraint firstItem="JfR-EA-r2W" firstAttribute="leading" secondItem="alJ-nu-rss" secondAttribute="trailing" constant="8" id="mF3-6X-Alq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="alJ-nu-rss" secondAttribute="bottom" constant="40" id="mRG-ID-4LW"/>
                 <constraint firstItem="nec-pI-30w" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nUG-yk-Q9L"/>
                 <constraint firstItem="7Ut-cy-4SV" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" id="ndA-Gi-Acp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="obB-Ei-mVw"/>
