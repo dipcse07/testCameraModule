@@ -13,7 +13,7 @@ enum RecordViewState {
 }
 
 protocol RecordButtonViewDelegate: AnyObject {
-    func recordButtonTapped(captureMode: RecordViewState, completionHandler: (Bool) -> Void )
+    func recordButtonTapped(captureMode: RecordViewState, completionHandler: @escaping (Bool) -> Void )
 }
 
 class RecordView: UIView {
@@ -56,7 +56,7 @@ class RecordView: UIView {
         delegate?.recordButtonTapped(captureMode: self.state, completionHandler: { [weak self ] success in
             guard let self = self else {return}
             guard success else {return}
-            switch state {
+            switch self.state {
             
             case .recording:
                 self.animateForStopped()

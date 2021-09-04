@@ -39,6 +39,8 @@ class CaptureViewController: UIViewController {
     private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
     private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
     
+    private var videoRecordButtonCompletionHandler: ((Bool) -> Void)!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -436,11 +438,23 @@ extension CaptureViewController: ToggleCaptureButtonViewDelegate {
         switch captureMode {
         case .photo:
             print(captureMode)
+            
+            if  !self.timerView.isHidden {
+             timerView.isHidden = true
+             timerController.resetTimer()
+             
+             self.captureSessionController.stopRecording { error in
+                 print(error ?? "Video recording error")
+             }
+             self.videoRecordButtonCompletionHandler(true)
+             }
+            
             self.imageCaptureView.isHidden = false
             self.recordView.isHidden = true
             completionHandler(true)
         case .video:
             print(captureMode)
+         
             self.imageCaptureView.isHidden = true
             self.recordView.isHidden =  false
             completionHandler(true)
@@ -488,12 +502,12 @@ extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 extension CaptureViewController: RecordButtonViewDelegate {
-    func recordButtonTapped(captureMode: RecordViewState, completionHandler: (Bool) -> Void) {
+    func recordButtonTapped(captureMode: RecordViewState, completionHandler: @escaping (Bool) -> Void) {
         switch captureMode {
         
         case .stopped:
-            timerView.isHidden = false
             
+            timerView.isHidden = false
             timerController.setupTimer {[weak self] seconds in
                 guard let self = self else {
                     return
@@ -501,6 +515,7 @@ extension CaptureViewController: RecordButtonViewDelegate {
                 self.timerView.updateTime(seconds: seconds)
                 print(seconds)
             }
+            
             self.captureSessionController.recordVideo { videoUrl, error in
                 guard let url = videoUrl else {
                     print(error ?? "Video recording error")
@@ -509,6 +524,7 @@ extension CaptureViewController: RecordButtonViewDelegate {
                 
                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
             }
+            self.videoRecordButtonCompletionHandler = completionHandler
             completionHandler(true)
         case .recording:
             timerView.isHidden = true
@@ -517,7 +533,7 @@ extension CaptureViewController: RecordButtonViewDelegate {
             self.captureSessionController.stopRecording { error in
                 print(error ?? "Video recording error")
             }
-            
+            self.videoRecordButtonCompletionHandler = completionHandler
             completionHandler(true)
             
         }
