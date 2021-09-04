@@ -51,7 +51,8 @@ class CaptureViewController: UIViewController {
         self.setupToggleCameraView()
         self.setupCaptureSessionController()
         self.registerForApplicationStateNotification()
-        //        setupTimer()
+        self.setupRecordButton()
+        //setupTimer()
         
     }
     
@@ -81,6 +82,26 @@ class CaptureViewController: UIViewController {
             self.setupOriatationConstraints(size: size)
             self.showViewsAfterDeviceOrientationChanges()
         }
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            showToast(message: "Could not save!! \n\(error)", fontSize: 12)
+        } else {
+            showToast(message: "Saved", fontSize: 12.0)
+        }
+    }
+    
+    @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            
+            showToast(message: "Could not save!! \n\(error)", fontSize: 12)
+        } else {
+            showToast(message: "Saved", fontSize: 12.0)
+        }
+        print(video)
     }
     
 }
@@ -320,6 +341,10 @@ private extension CaptureViewController {
         self.imageCaptureView.imageCaptureViewDelegate = self
     }
     
+    func setupRecordButton() {
+        self.recordView.delegate = self
+    }
+    
     func showPointOfInterestViewAtPoint(point:CGPoint){
         pointOfInterestHalfCompletedWorkItem = nil
         pointOfInterestCompleteWorkItem = nil
@@ -459,5 +484,45 @@ extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+}
+
+extension CaptureViewController: RecordButtonViewDelegate {
+    func recordButtonTapped(captureMode: RecordViewState, completionHandler: (Bool) -> Void) {
+        switch captureMode {
+        
+        case .stopped:
+            timerView.isHidden = false
+            
+            timerController.setupTimer {[weak self] seconds in
+                guard let self = self else {
+                    return
+                }
+                self.timerView.updateTime(seconds: seconds)
+                print(seconds)
+            }
+            self.captureSessionController.recordVideo { videoUrl, error in
+                guard let url = videoUrl else {
+                    print(error ?? "Video recording error")
+                    return
+                }
+                
+                UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+            completionHandler(true)
+        case .recording:
+            timerView.isHidden = true
+            timerController.resetTimer()
+            
+            self.captureSessionController.stopRecording { error in
+                print(error ?? "Video recording error")
+            }
+            
+            completionHandler(true)
+            
+        }
+    }
+    
+    
     
 }

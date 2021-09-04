@@ -12,6 +12,10 @@ enum RecordViewState {
     case recording
 }
 
+protocol RecordButtonViewDelegate: AnyObject {
+    func recordButtonTapped(captureMode: RecordViewState, completionHandler: (Bool) -> Void )
+}
+
 class RecordView: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -25,6 +29,7 @@ class RecordView: UIView {
     @IBOutlet weak var stopView: UIView!
     
     private var state = RecordViewState.stopped
+    var delegate: RecordButtonViewDelegate?
     
     
     override init(frame: CGRect) {
@@ -48,17 +53,24 @@ class RecordView: UIView {
         setupContainerView()
     }
     @IBAction func tapHnadler(tapGesterRec: UITapGestureRecognizer){
-        
-        switch state {
-        
-        case .stopped:
-            state = .recording
-            animateForRecording()
-        case .recording:
-            state = .stopped
-            animateForStopped()
-        }
-    }
+        delegate?.recordButtonTapped(captureMode: self.state, completionHandler: { [weak self ] success in
+            guard let self = self else {return}
+            guard success else {return}
+            switch state {
+            
+            case .recording:
+                self.animateForStopped()
+                self.state = .stopped
+            case .stopped:
+                self.animateForRecording()
+                self.state = .recording
+            default:
+                break
+            }
+          
+        })
+
+}
 }
 
 private extension RecordView {

@@ -21,10 +21,30 @@ enum CameraPosition{
     case back
 }
 
+enum CaptureSessionError: Swift.Error {
+    case captureSessionAlreadyRunning
+    case captureSessionIsMissing
+    case inputsAreInvalid
+    case invalidOperation
+    case noCamerasAvailable
+    case unknown
+}
+
 typealias CaptureSessionInitializedCompletionHandler = () -> Void
 typealias CaptureSessionToggleCompletionHandler = (CameraPosition) -> Void
 
-class CaptureSessionController: NSObject {
+class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        
+        if error == nil {
+            self.videoRecordCompletionBlock?(outputFileURL, nil)
+        } else {
+            self.videoRecordCompletionBlock?(nil, error)
+        }
+        
+    }
+    
+    
     private lazy var captureSession = AVCaptureSession()
     private var captureDevice:AVCaptureDevice?
     private var captureDeviceInput:AVCaptureDeviceInput?
@@ -32,8 +52,11 @@ class CaptureSessionController: NSObject {
     private var cameraPosition = CameraPosition.back
     private var previousZoomState = ZoomState.wide
     private let photoOutput = AVCapturePhotoOutput()
+    var videoOutput = AVCaptureMovieFileOutput()
+    var audioInput = AVCaptureDevice.DeviceType.builtInMicrophone
     var captureImage: UIImage?
     private var refferedViewController: UIViewController?
+    var videoRecordCompletionBlock: ((URL?, Error?) -> Void)?
 
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
@@ -141,7 +164,22 @@ class CaptureSessionController: NSObject {
         
         if captureSession.canAddOutput(photoOutput) {
             captureSession.addOutput(photoOutput)
-        }else {print("could not add output for photo Output")}
+        }else {print("could not add output for photo Output")
+            
+            
+        }
+   if captureSession.canAddOutput(videoOutput) {
+            captureSession.addOutput(videoOutput)
+        }else {print("could not add output for video Output")
+        }
+        
+        let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)!
+        do {
+            let audioInput = try AVCaptureDeviceInput(device: audioDevice)
+            self.captureSession.addInput(audioInput)
+        } catch {
+            print("Unable to add audio device to the recording.")
+        }
         captureSession.addInput(captureDeviceInput)
         captureSession.startRunning()
         setVideoZoomFactor()
@@ -206,7 +244,31 @@ class CaptureSessionController: NSObject {
         return setTorchMode(torchMode: .off)
     }
     
+    func recordVideo(completion: @escaping (URL?, Error?)-> Void) {
+        guard  captureSession.isRunning else {
+            completion(nil, CaptureSessionError.captureSessionIsMissing)
+            return
+        }
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let uniqueID = UUID().uuidString
+        let fileUrl = paths[0].appendingPathComponent("\(uniqueID).mp4")
+        try? FileManager.default.removeItem(at: fileUrl)
+        videoOutput.startRecording(to: fileUrl, recordingDelegate: self)
+        self.videoRecordCompletionBlock = completion
+    }
+    
+    func stopRecording(completion: @escaping (Error?)->Void) {
+        guard captureSession.isRunning else {
+            completion(CaptureSessionError.captureSessionIsMissing)
+            return
+        }
+        self.videoOutput.stopRecording()
+    }
+    
+    
 }
+
 private extension CaptureSessionController {
     func getBackVideoCaptureDevice() -> AVCaptureDevice? {
         
