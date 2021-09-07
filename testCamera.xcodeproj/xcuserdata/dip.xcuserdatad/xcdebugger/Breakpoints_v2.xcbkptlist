@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E822A570-BD42-49DF-A2CD-422C45072F1B"
+            uuid = "A56B4BD4-B377-407B-8C9F-E7C3633A3E6F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "testCamera/CameraModule/ViewControllers/CaptureControllers/CaptureViewController.swift"
+            filePath = "testCamera/CameraModule/View/PhotoPreviewView/PhotoPreviewView2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "492"
-            endingLineNumber = "492"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "didPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

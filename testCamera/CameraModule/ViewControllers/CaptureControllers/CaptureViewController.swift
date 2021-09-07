@@ -38,9 +38,7 @@ class CaptureViewController: UIViewController {
     private var hideAlertViewWorkItem: DispatchWorkItem?
     private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
     private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
-    
     private var videoRecordButtonCompletionHandler: ((Bool) -> Void)!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,12 +113,10 @@ private extension CaptureViewController {
             recordView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             recordView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             switchZoomView.heightAnchor.constraint(equalToConstant: 60),
             switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30),
             toggleCameraView.centerYAnchor.constraint(equalTo: recordView.centerYAnchor),
             toggleCameraView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -30)
-            
         ]
         
         landscapeConstraints = [recordView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
@@ -210,6 +206,7 @@ private extension CaptureViewController {
             guard let self = self else {return }
             if self.captureSessionController != nil {
                 print("session is initialized")
+                
                 self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
                 self.setupVideoOrientation()
                 self.setupToggleCameraView()
@@ -473,6 +470,7 @@ extension CaptureViewController:ImageCaptureViewDelegate {
 }
 
 extension CaptureViewController: GalaryViewDelegate {
+    
     func galleryButtonTapped() {
         self.imagePickerController.sourceType = .photoLibrary
         self.imagePickerController.delegate = self
@@ -502,6 +500,7 @@ extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 extension CaptureViewController: RecordButtonViewDelegate {
+    
     func recordButtonTapped(captureMode: RecordViewState, completionHandler: @escaping (Bool) -> Void) {
         switch captureMode {
         
@@ -538,7 +537,5 @@ extension CaptureViewController: RecordButtonViewDelegate {
             
         }
     }
-    
-    
-    
+
 }

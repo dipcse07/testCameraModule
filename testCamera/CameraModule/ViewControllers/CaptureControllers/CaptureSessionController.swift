@@ -396,7 +396,7 @@ extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
         guard let imageData = photo.fileDataRepresentation() else { return }
         let previewImage = UIImage(data: imageData)
         self.captureImage = previewImage
-        let photoPreviewContainer = PhotoPreviewView(frame: self.refferedViewController!.view.frame)
+        let photoPreviewContainer = PhotoPreviewView2(frame: self.refferedViewController!.view.frame)
         photoPreviewContainer.photoImageView.image = previewImage
         self.refferedViewController!.view.addSubview(photoPreviewContainer)        
     }

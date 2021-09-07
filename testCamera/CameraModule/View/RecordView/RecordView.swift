@@ -64,8 +64,7 @@ class RecordView: UIView {
             case .stopped:
                 self.animateForRecording()
                 self.state = .recording
-            default:
-                break
+         
             }
           
         })
