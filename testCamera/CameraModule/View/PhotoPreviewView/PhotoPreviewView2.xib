@@ -26,12 +26,17 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewz-ik-I5d">
-                    <rect key="frame" x="20" y="812" width="316" height="50"/>
+                    <rect key="frame" x="20" y="810" width="316" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Wk4-Ok-3kM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="23"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-L0-ycT">
                     <rect key="frame" x="348" y="810" width="46" height="50"/>
@@ -39,12 +44,14 @@
                         <constraint firstAttribute="height" constant="50" id="Oe8-Bi-w8b"/>
                         <constraint firstAttribute="width" constant="46" id="osZ-AM-oHq"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Add">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
                         <action selector="addTextButtonPressed:" destination="-1" eventType="touchUpInside" id="Snp-Cs-jTn"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjJ-CF-LT8">
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjJ-CF-LT8">
                     <rect key="frame" x="182" y="423" width="50" height="50"/>
                     <gestureRecognizers/>
                     <constraints>
@@ -64,9 +71,9 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dOf-FC-L7r" secondAttribute="trailing" id="EXH-Ez-t7c"/>
                 <constraint firstItem="zjJ-CF-LT8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IBa-IX-Ezn"/>
                 <constraint firstItem="ZeY-L0-ycT" firstAttribute="leading" secondItem="ewz-ik-I5d" secondAttribute="trailing" constant="12" id="Obm-Ry-DzO"/>
-                <constraint firstItem="ewz-ik-I5d" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ZJc-ci-TaZ"/>
                 <constraint firstItem="dOf-FC-L7r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Zj8-1O-9k2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZeY-L0-ycT" secondAttribute="trailing" constant="20" id="bhu-7m-1Ay"/>
+                <constraint firstItem="ZeY-L0-ycT" firstAttribute="centerY" secondItem="ewz-ik-I5d" secondAttribute="centerY" id="dyp-S6-NFC"/>
                 <constraint firstAttribute="bottom" secondItem="dOf-FC-L7r" secondAttribute="bottom" id="i4g-C9-Z3l"/>
                 <constraint firstItem="ewz-ik-I5d" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="s62-bc-xbK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZeY-L0-ycT" secondAttribute="bottom" constant="2" id="xpV-M9-Bgt"/>

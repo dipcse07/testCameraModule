@@ -87,7 +87,9 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
                 do {
                     try PHPhotoLibrary.shared().performChangesAndWait {
                         PHAssetChangeRequest.creationRequestForAsset(from: previewImage)
-                        print("photo has saved in library...")
+//                        print("photo has saved in library...")
+                       
+                        
                         self.photoUsageDelegate?.useCapturedPhoto(image: previewImage)
                         self.handleCancel()
                     }
@@ -98,12 +100,15 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
                 print("Something went wrong with permission...")
             }
         }
+        self.showAlert(message: "Photo has been saved")
     }
 
     @IBAction func addTextButtonPressed(_ sender: UIButton) {
+        initialCenter = textLable.center
         if textLable.text != nil , photoImageView.image != nil {
             photoImageView.image = textToImage(drawText: textLable.text!, inImage: photoImageView.image!, atPoint: initialCenter)
         }
+        textLable.text?.removeAll()
     }
     
 }
@@ -112,30 +117,41 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
 private extension PhotoPreviewView2  {
     
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
-        let textColor = UIColor.white
-        let textFont = UIFont(name: "Helvetica Bold", size: 12)!
+        // Setup the font specific variables
+        var textColor = UIColor.white
+           var textFont = UIFont(name: "Helvetica Bold", size: 48)!
 
+           // Setup the image context using the passed image
         let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+           UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
 
-        let textFontAttributes = [
+           // Setup the font attributes that will be later used to dictate how the text should be drawn
+           let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.foregroundColor: textColor,
-            ] as [NSAttributedString.Key : Any]
-        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+           ]
 
-        let rect = CGRect(origin: point, size: image.size)
+           // Put the image into a rectangle as large as the original image
+        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+
+           // Create a point within the space that is as bit as the image
+        let rect = CGRect(x: point.x, y: point.y, width: image.size.width, height: image.size.height)
+
+           // Draw the text into an image
         text.draw(in: rect, withAttributes: textFontAttributes)
 
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+           // Create a new image out of the images we have created
+           let newImage = UIGraphicsGetImageFromCurrentImageContext()
 
-        return newImage!
+           // End the context now that we have the image we need
+           UIGraphicsEndImageContext()
+
+           //Pass the image back up to the caller
+           return newImage!
     }
     
     func setupContainerView() {
-        
-        
+
         self.imageContainerView.addSubview(photoImageView)
         self.imageContainerView.addSubview(cancelButton)
         self.imageContainerView.addSubview(savePhotoButton)
@@ -163,7 +179,6 @@ private extension PhotoPreviewView2  {
                 
             case .changed:
                 let translation = sender.translation(in: sender.view)
-
                 textLable.center = CGPoint(x: initialCenter.x + translation.x,
                                               y: initialCenter.y + translation.y)
                 initialCenter = textLable.center
@@ -171,6 +186,18 @@ private extension PhotoPreviewView2  {
             default:
                 break
             }
+    }
+    
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            
+        // duration in seconds
+        let duration: Double = 2
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true)
+        }
     }
 }
 
