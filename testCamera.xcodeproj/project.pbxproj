@@ -10,6 +10,13 @@
 		3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */; };
 		3E05EFA226CA4C3E00363E4C /* NotificationName+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */; };
 		3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */; };
+		3E19204526E7798E00D1B57B /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19203B26E7798E00D1B57B /* DPDConstants.swift */; };
+		3E19204626E7798E00D1B57B /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19203C26E7798E00D1B57B /* DPDKeyboardListener.swift */; };
+		3E19204726E7798E00D1B57B /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19203D26E7798E00D1B57B /* DPDUIView+Extension.swift */; };
+		3E19204926E7798E00D1B57B /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E19204026E7798E00D1B57B /* DropDownCell.xib */; };
+		3E19204A26E7798E00D1B57B /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19204226E7798E00D1B57B /* DropDown+Appearance.swift */; };
+		3E19204B26E7798E00D1B57B /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19204326E7798E00D1B57B /* DropDown.swift */; };
+		3E19204C26E7798E00D1B57B /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19204426E7798E00D1B57B /* DropDownCell.swift */; };
 		3E28E95026C8B83E00F5B8DB /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E94F26C8B83E00F5B8DB /* TimerController.swift */; };
 		3E28E95226C8D53300F5B8DB /* UIColor + Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */; };
 		3E28E95526C8D71500F5B8DB /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28E95426C8D71500F5B8DB /* SwitchZoomView.swift */; };
@@ -65,6 +72,14 @@
 		3E04FE3F26B52982004734F5 /* RequestMicrophoneAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorizationController.swift; sourceTree = "<group>"; };
 		3E05EFA126CA4C3E00363E4C /* NotificationName+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Custom.swift"; sourceTree = "<group>"; };
 		3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOrientationController.swift; sourceTree = "<group>"; };
+		3E19203926E7798E00D1B57B /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDown.h; sourceTree = "<group>"; };
+		3E19203B26E7798E00D1B57B /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
+		3E19203C26E7798E00D1B57B /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		3E19203D26E7798E00D1B57B /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		3E19204026E7798E00D1B57B /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		3E19204226E7798E00D1B57B /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		3E19204326E7798E00D1B57B /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		3E19204426E7798E00D1B57B /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		3E28E94F26C8B83E00F5B8DB /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		3E28E95126C8D53300F5B8DB /* UIColor + Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Colors.swift"; sourceTree = "<group>"; };
 		3E28E95426C8D71500F5B8DB /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
@@ -135,6 +150,53 @@
 				3E05EFA426CA6F0000363E4C /* VideoOrientationController.swift */,
 			);
 			path = VideoOrientation;
+			sourceTree = "<group>";
+		};
+		3E19203726E7797B00D1B57B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E19203826E7798E00D1B57B /* DropDown */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3E19203826E7798E00D1B57B /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				3E19203926E7798E00D1B57B /* DropDown.h */,
+				3E19203A26E7798E00D1B57B /* helpers */,
+				3E19203F26E7798E00D1B57B /* resources */,
+				3E19204126E7798E00D1B57B /* src */,
+			);
+			path = DropDown;
+			sourceTree = "<group>";
+		};
+		3E19203A26E7798E00D1B57B /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3E19203B26E7798E00D1B57B /* DPDConstants.swift */,
+				3E19203C26E7798E00D1B57B /* DPDKeyboardListener.swift */,
+				3E19203D26E7798E00D1B57B /* DPDUIView+Extension.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		3E19203F26E7798E00D1B57B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E19204026E7798E00D1B57B /* DropDownCell.xib */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		3E19204126E7798E00D1B57B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3E19204226E7798E00D1B57B /* DropDown+Appearance.swift */,
+				3E19204326E7798E00D1B57B /* DropDown.swift */,
+				3E19204426E7798E00D1B57B /* DropDownCell.swift */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		3E28E95326C8D6EE00F5B8DB /* switchZoom */ = {
@@ -353,6 +415,7 @@
 		3ED91F9026D83E88005EEC53 /* CameraModule */ = {
 			isa = PBXGroup;
 			children = (
+				3E19203726E7797B00D1B57B /* Resources */,
 				3EF31B8326B7C6E200CC852C /* ViewControllers */,
 				3E90816026B64E1900CF7AEA /* Extension */,
 				3E3D24CD26B1281200F2F3CC /* View */,
@@ -449,6 +512,7 @@
 				3E3D24D326B1298000F2F3CC /* RequestCameraAuthorizationView.xib in Resources */,
 				3E7D44A526BECD2200D9CA72 /* TimerView.xib in Resources */,
 				3E36CBB626D5EC7F0068DA55 /* PointOfInterest.xib in Resources */,
+				3E19204926E7798E00D1B57B /* DropDownCell.xib in Resources */,
 				3E90815F26B64A0000CF7AEA /* RequestPhotoLibraryAuthView.xib in Resources */,
 				3E3D24C226B11E1200F2F3CC /* LaunchScreen.storyboard in Resources */,
 				3EB1DD8626B4FFDE00082939 /* RequestMicrophoneAuthorizationView.xib in Resources */,
@@ -484,14 +548,17 @@
 				3E294F3026D52E8000867BA7 /* AlertView.swift in Sources */,
 				3E90816626B66EFB00CF7AEA /* RequestPhotoLibraryAuthController.swift in Sources */,
 				3E9D6A7126B8EB0D00EDFECA /* CaptureSessionController.swift in Sources */,
+				3E19204726E7798E00D1B57B /* DPDUIView+Extension.swift in Sources */,
 				3E28E95526C8D71500F5B8DB /* SwitchZoomView.swift in Sources */,
 				3E28E95226C8D53300F5B8DB /* UIColor + Colors.swift in Sources */,
 				3E05EFA226CA4C3E00363E4C /* NotificationName+Custom.swift in Sources */,
 				3EB1DD8426B4FFA800082939 /* RequestMicrophoneAuthorizationView.swift in Sources */,
+				3E19204B26E7798E00D1B57B /* DropDown.swift in Sources */,
 				3E7D44A326BECD1100D9CA72 /* TimerView.swift in Sources */,
 				3E05EFA526CA6F0000363E4C /* VideoOrientationController.swift in Sources */,
 				3E04FE4026B52982004734F5 /* RequestMicrophoneAuthorizationController.swift in Sources */,
 				3EF31B8926B7C76500CC852C /* CameraModuleSetup.swift in Sources */,
+				3E19204C26E7798E00D1B57B /* DropDownCell.swift in Sources */,
 				3E8002B326D7CB06006A6A1D /* ToggleCaptureButtonView.swift in Sources */,
 				3E3D24B826B11E0E00F2F3CC /* SceneDelegate.swift in Sources */,
 				3EE833E026E7251E00EE20E8 /* PhotoPreviewView2.swift in Sources */,
@@ -503,10 +570,13 @@
 				3E8002B826D7E50C006A6A1D /* ImageCaptureView.swift in Sources */,
 				3E28E95026C8B83E00F5B8DB /* TimerController.swift in Sources */,
 				3E3D24D126B1291F00F2F3CC /* RequestCameraAuthorizationView.swift in Sources */,
+				3E19204526E7798E00D1B57B /* DPDConstants.swift in Sources */,
+				3E19204A26E7798E00D1B57B /* DropDown+Appearance.swift in Sources */,
 				3E3D24D526B181E300F2F3CC /* RequestCameraAuthorizationController.swift in Sources */,
 				3E90816426B64FEF00CF7AEA /* UIView+Animation.swift in Sources */,
 				3E3D24CB26B11E7F00F2F3CC /* LaunchViewController.swift in Sources */,
 				3E36CBB426D5EC590068DA55 /* PointOfInterest.swift in Sources */,
+				3E19204626E7798E00D1B57B /* DPDKeyboardListener.swift in Sources */,
 				3E28E95926C966B800F5B8DB /* ToggleCameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

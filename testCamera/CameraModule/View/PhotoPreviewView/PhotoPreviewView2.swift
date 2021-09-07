@@ -7,28 +7,75 @@
 
 import UIKit
 import Photos
+import CoreImage
 
 protocol PhotoUsageDelegate: AnyObject {
     func useCapturedPhoto(image: UIImage)
 }
 
-class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
+class PhotoPreviewView2: UIView {
     
+    struct Filter {
+        let filterName: String
+        var filterEffectValue: Any?
+        var filterEffectValueName:String?
+        
+        init(filterName: String, filterEffectValue: Any?,filterEffectValueName:String?){
+            self.filterName = filterName
+            self.filterEffectValue = filterEffectValue
+            self.filterEffectValueName = filterEffectValueName
+        }
+        
+    }
+    
+    private func applyFilterTo(image: UIImage, filterEffect: Filter) -> UIImage? {
+        
+        
+        guard let cgImage = image.cgImage, let openGLContext = EAGLContext(api: .openGLES3) else {
+            return nil
+        }
+        
+        let context = CIContext(eaglContext: openGLContext)
+        
+        let ciImage = CIImage(cgImage: cgImage)
+        
+        let filter = CIFilter(name: filterEffect.filterName)
+        
+        filter?.setValue(ciImage, forKey: kCIInputImageKey )
+       
+        if let filterEffectValue = filterEffect.filterEffectValue, let filterEffectValueName = filterEffect.filterEffectValueName {
+            filter?.setValue(filterEffectValue, forKey: filterEffectValueName)
+        }
+    
+        var filteredImage: UIImage?
+        
+        if let output = filter?.value(forKey: kCIOutputImageKey) as? CIImage,
+           let cgiImageResult = context.createCGImage(output, from: output.extent){
+            filteredImage = UIImage(cgImage: cgiImageResult)
+            
+        }
+        
+        return filteredImage
+    }
     
     @IBOutlet var contentView: UIView!
     
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var imageContainerView: UIView!
     
     @IBOutlet weak var textLable: UILabel!
     
     @IBOutlet weak var textField: UITextField!
     
+    var originalImage: UIImage?
     let photoImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        
         return imageView
     }()
+    
     
     lazy private var cancelButton: UIButton = {
         let button = UIButton(type: .system)
@@ -46,7 +93,7 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
         return button
     }()
     
-    
+    var dropDown = DropDown()
     private var initialCenter: CGPoint = .zero
     var photoUsageDelegate: PhotoUsageDelegate?
     override init(frame: CGRect) {
@@ -70,6 +117,8 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         setupContainerView()
+        dropDownMenuSetUp()
+        originalImage = photoImageView.image
     }
     
     @objc private func handleCancel() {
@@ -104,11 +153,18 @@ class PhotoPreviewView2: UIView, UIGestureRecognizerDelegate {
     }
 
     @IBAction func addTextButtonPressed(_ sender: UIButton) {
-        initialCenter = textLable.center
+//        initialCenter = textLable.center
+        
         if textLable.text != nil , photoImageView.image != nil {
-            photoImageView.image = textToImage(drawText: textLable.text!, inImage: photoImageView.image!, atPoint: initialCenter)
+            photoImageView.image = textToImage(drawText: textLable.text!, inImage: photoImageView.image!, atPoint: textLable.center)
         }
         textLable.text?.removeAll()
+        initialCenter = .zero
+    }
+    
+    
+    @IBAction func filterButtonPressed(_ sender: UIButton) {
+        dropDown.show()
     }
     
 }
@@ -177,12 +233,11 @@ private extension PhotoPreviewView2  {
             case .began:
                 initialCenter = textLable.center
                 
-            case .changed:
-                let translation = sender.translation(in: sender.view)
-                textLable.center = CGPoint(x: initialCenter.x + translation.x,
-                                              y: initialCenter.y + translation.y)
-                initialCenter = textLable.center
-                print("panLabel changed")
+        case .ended:
+            let translation = sender.translation(in: sender.view)
+            textLable.center = CGPoint(x: initialCenter.x + translation.x,
+                                          y: initialCenter.y + translation.y)
+            initialCenter = textLable.center
             default:
                 break
             }
@@ -198,6 +253,69 @@ private extension PhotoPreviewView2  {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
             alert.dismiss(animated: true)
         }
+    }
+    
+    private func dropDownMenuSetUp() {
+        DropDown.appearance().backgroundColor = UIColor(named: "BackgroundAlpha60" )
+        DropDown.appearance().textColor = UIColor.white
+        DropDown.appearance().selectedTextColor = UIColor(named: "Selected" )!
+        DropDown.appearance().textFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+        DropDown.appearance().selectionBackgroundColor = UIColor.clear
+        // Do any additional setup after loading the view.
+        dropDown.dataSource = ["Sepia", "Photo Transfer", "Noir","Blur","Clear Effect"]
+        dropDown.anchorView =  filterButton
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.direction = .bottom
+        
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            switch index {
+            case 0: print("at index: \(index) ", item)
+  
+                let image = getImage()
+                photoImageView.image = applyFilterTo(image: image, filterEffect: Filter(filterName: "CISepiaTone", filterEffectValue: 0.70, filterEffectValueName: kCIInputIntensityKey))
+                
+        
+            case 1: print("at index: \(index) ", item)
+                let image = getImage()
+                photoImageView.image = applyFilterTo(image: image,
+                filterEffect: Filter(filterName: "CIPhotoEffectProcess", filterEffectValue: nil, filterEffectValueName: nil))
+            
+            case 2: print("at index: \(index) ", item)
+                let image = getImage()
+                photoImageView.image = applyFilterTo(image: image,
+                                                     filterEffect: Filter(filterName: "CIPhotoEffectNoir",
+                                                                          filterEffectValue: nil,
+                                                                          filterEffectValueName: nil))
+                
+            case 3: print("at index: \(index) ", item)
+                let image = getImage()
+                photoImageView.image = applyFilterTo(image: image,
+                                                     filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0, filterEffectValueName: kCIInputRadiusKey))
+                
+                
+            case 4: print("at index: \(index) ", item)
+                
+                photoImageView.image = getImage()
+                
+            default:
+                break
+            }
+        }
+        
+    }
+    
+    private func getImage () -> UIImage {
+        var image: UIImage
+        if originalImage == nil {
+            originalImage = photoImageView.image
+            image = originalImage!
+            
+        }else {
+            image = originalImage!
+        }
+        
+        return image
     }
 }
 
