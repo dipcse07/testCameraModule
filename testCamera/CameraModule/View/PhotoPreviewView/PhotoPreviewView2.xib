@@ -53,6 +53,13 @@
                         <action selector="addTextButtonPressed:" destination="-1" eventType="touchUpInside" id="Snp-Cs-jTn"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZnE-Tn-H3k">
+                    <rect key="frame" x="97" y="76" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cropButtonPressed:" destination="-1" eventType="touchUpInside" id="x0T-Gf-JKx"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssZ-Gd-UWS">
                     <rect key="frame" x="24" y="68" width="49" height="34"/>
                     <state key="normal" title="Filters">
@@ -80,6 +87,8 @@
                 <constraint firstItem="zjJ-CF-LT8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0Kx-mA-E7w"/>
                 <constraint firstItem="ssZ-Gd-UWS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="0o3-H5-Dpp"/>
                 <constraint firstItem="dOf-FC-L7r" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="60v-46-x4H"/>
+                <constraint firstItem="ZnE-Tn-H3k" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="32" id="79S-lb-h31"/>
+                <constraint firstItem="ZnE-Tn-H3k" firstAttribute="leading" secondItem="ssZ-Gd-UWS" secondAttribute="trailing" constant="24" id="9Sm-y0-kRf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dOf-FC-L7r" secondAttribute="trailing" id="EXH-Ez-t7c"/>
                 <constraint firstItem="ssZ-Gd-UWS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="Gr6-2J-rS8"/>
                 <constraint firstItem="zjJ-CF-LT8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IBa-IX-Ezn"/>

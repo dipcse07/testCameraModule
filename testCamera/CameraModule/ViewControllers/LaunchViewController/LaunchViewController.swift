@@ -9,6 +9,15 @@ import UIKit
 
 class LaunchViewController: UIViewController {
     
+    internal static func instantiate() -> UIViewController? {
+        
+        let nibName = String(describing: LaunchViewController.self)
+        let bundle = Bundle.main
+        let launchViewController = LaunchViewController(nibName: nibName, bundle: bundle)
+        
+        return launchViewController
+    }
+    
     private var requestCameraAuthView: RequestCameraAuthorizationView?
     private var cameraAuthStatus = RequestCameraAuthorizationController.getCameraAuthorizationStatus() {
         didSet {

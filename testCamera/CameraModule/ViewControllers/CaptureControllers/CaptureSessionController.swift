@@ -44,7 +44,6 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         
     }
     
-    
     private lazy var captureSession = AVCaptureSession()
     private var captureDevice:AVCaptureDevice?
     private var captureDeviceInput:AVCaptureDeviceInput?
@@ -57,6 +56,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     var captureImage: UIImage?
     private var refferedViewController: UIViewController?
     var videoRecordCompletionBlock: ((URL?, Error?) -> Void)?
+    var presentingViewController: UIViewController?
 
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
@@ -68,7 +68,6 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         super.init()
         self.captureDevice = getBackVideoCaptureDevice()
     }
-    
     
     func getCaptureSession() -> AVCaptureSession {
         return captureSession
@@ -265,8 +264,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         }
         self.videoOutput.stopRecording()
     }
-    
-    
+
 }
 
 private extension CaptureSessionController {
@@ -393,11 +391,24 @@ private extension CaptureSessionController {
 
 extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
         guard let imageData = photo.fileDataRepresentation() else { return }
         let previewImage = UIImage(data: imageData)
         self.captureImage = previewImage
-        let photoPreviewContainer = PhotoPreviewView2(frame: self.refferedViewController!.view.frame)
-        photoPreviewContainer.photoImageView.image = previewImage
-        self.refferedViewController!.view.addSubview(photoPreviewContainer)        
+        let fixedImage = previewImage?.fixOrientation()
+        let photoPreviewContainer = PhotoPreviewView2(frame: self.refferedViewController!.view.frame,
+        presentingViewController: self.presentingViewController)
+        photoPreviewContainer.photoImageView.image = fixedImage
+        photoPreviewContainer.photoUsageDelegate = self
+        self.refferedViewController!.view.addSubview(photoPreviewContainer)
+        
     }
+}
+
+
+extension CaptureSessionController: PhotoUsageDelegate {
+    func useCapturedPhoto(image: UIImage) {
+        print("image ", image)
+    }
+    
 }

@@ -28,7 +28,7 @@ class CaptureViewController: UIViewController {
     private var captureSessionController = CaptureSessionController()
     private let photoOutput = AVCapturePhotoOutput()
     private var imagePickerController = UIImagePickerController()
-    
+
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
     private lazy var timerController = TimerController()
@@ -202,11 +202,11 @@ private extension CaptureViewController {
     }
     
     func setupCaptureSessionController() {
+        captureSessionController.presentingViewController = self
         self.captureSessionController.initializeCaptureSession(completionHandler: { [ weak self] in
             guard let self = self else {return }
             if self.captureSessionController != nil {
                 print("session is initialized")
-                
                 self.videoPreviewView.videoPreviewLayer.session = self.captureSessionController.getCaptureSession()
                 self.setupVideoOrientation()
                 self.setupToggleCameraView()

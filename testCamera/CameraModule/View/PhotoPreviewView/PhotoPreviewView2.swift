@@ -8,12 +8,13 @@
 import UIKit
 import Photos
 import CoreImage
+//import CropViewController
 
 protocol PhotoUsageDelegate: AnyObject {
     func useCapturedPhoto(image: UIImage)
 }
 
-class PhotoPreviewView2: UIView {
+class PhotoPreviewView2: UIView, CropViewControllerDelegate {
     
     struct Filter {
         let filterName: String
@@ -66,7 +67,7 @@ class PhotoPreviewView2: UIView {
     @IBOutlet weak var textLable: UILabel!
     
     @IBOutlet weak var textField: UITextField!
-    
+    public var presentingViewController: UIViewController?
     var originalImage: UIImage?
     let photoImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -96,8 +97,10 @@ class PhotoPreviewView2: UIView {
     var dropDown = DropDown()
     private var initialCenter: CGPoint = .zero
     var photoUsageDelegate: PhotoUsageDelegate?
-    override init(frame: CGRect) {
+    var presetingViewController: UIViewController?
+    init(frame: CGRect, presentingViewController: UIViewController?) {
         super.init(frame: frame)
+        self.presentingViewController = presentingViewController
 //        addSubviews(photoImageView, cancelButton, savePhotoButton)
         customInit()
        
@@ -167,8 +170,33 @@ class PhotoPreviewView2: UIView {
         dropDown.show()
     }
     
+    @IBAction func cropButtonPressed(_ sender: UIButton) {
+  
+   print("cropButtonPressed")
+        presentCropViewController()
+ 
+    }
+    
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            // 'image' is the newly cropped version of the original image
+    
+        print("Cropped Image")
+        photoImageView.image = image
+        cropViewController.dismiss(animated: true, completion: nil)
+        }
+    
+    func presentCropViewController() {
+        
+      let image: UIImage = getImage()
+        print("presentingViewController")
+          let cropViewController = CropViewController(image: image)
+          cropViewController.delegate = self
+        presentingViewController?.present(cropViewController, animated: true, completion: nil)
+//            presentingViewController?.navigationController?.pushViewController(cropViewController, animated: true)
+    }
+    
 }
-
 
 private extension PhotoPreviewView2  {
     
