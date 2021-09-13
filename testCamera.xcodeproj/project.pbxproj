@@ -899,7 +899,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/MYMACHDD/XcodeTutoProjects/testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -954,7 +954,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/MYMACHDD/XcodeTutoProjects/testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -974,7 +974,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.debuggerlab.testCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/MYMACHDD/XcodeTutoProjects/testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -994,7 +994,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.debuggerlab.testCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/MYMACHDD/XcodeTutoProjects/testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "testCamera/testCamera/CameraModule/Resources/Crop/CropViewController-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
