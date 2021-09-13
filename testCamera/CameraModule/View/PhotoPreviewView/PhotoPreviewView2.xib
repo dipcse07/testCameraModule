@@ -25,10 +25,17 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-FC-L7r" userLabel="imageContainerView">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4g-6Q-B2U">
+                            <rect key="frame" x="94" y="804" width="26" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewz-ik-I5d">
-                    <rect key="frame" x="20" y="810" width="316" height="50"/>
+                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewz-ik-I5d">
+                    <rect key="frame" x="133" y="792" width="203" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Wk4-Ok-3kM"/>
                     </constraints>
@@ -41,7 +48,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-L0-ycT">
-                    <rect key="frame" x="348" y="810" width="46" height="50"/>
+                    <rect key="frame" x="348" y="792" width="46" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Oe8-Bi-w8b"/>
                         <constraint firstAttribute="width" constant="46" id="osZ-AM-oHq"/>
@@ -100,10 +107,9 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZeY-L0-ycT" secondAttribute="trailing" constant="20" id="bhu-7m-1Ay"/>
                 <constraint firstItem="ZeY-L0-ycT" firstAttribute="centerY" secondItem="ewz-ik-I5d" secondAttribute="centerY" id="dyp-S6-NFC"/>
                 <constraint firstAttribute="bottom" secondItem="dOf-FC-L7r" secondAttribute="bottom" id="i4g-C9-Z3l"/>
-                <constraint firstItem="ewz-ik-I5d" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="s62-bc-xbK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZeY-L0-ycT" secondAttribute="bottom" constant="2" id="xpV-M9-Bgt"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZeY-L0-ycT" secondAttribute="bottom" constant="20" id="xpV-M9-Bgt"/>
             </constraints>
-            <point key="canvasLocation" x="-243" y="33"/>
+            <point key="canvasLocation" x="-243.47826086956525" y="32.8125"/>
         </view>
     </objects>
     <resources>
