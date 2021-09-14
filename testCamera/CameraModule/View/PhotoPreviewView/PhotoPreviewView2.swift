@@ -24,79 +24,23 @@ enum Fonts: String {
 
 class PhotoPreviewView2: UIView, CropViewControllerDelegate {
     
-    struct Filter {
-        let filterName: String
-        var filterEffectValue: Any?
-        var filterEffectValueName:String?
-        
-        init(filterName: String, filterEffectValue: Any?,filterEffectValueName:String?){
-            self.filterName = filterName
-            self.filterEffectValue = filterEffectValue
-            self.filterEffectValueName = filterEffectValueName
-        }
-    }
-    
-    
-    
-    
-    
-    private func applyFilterTo(image: UIImage, filterEffect: Filter) -> UIImage? {
-        
-        
-        guard let cgImage = image.cgImage, let openGLContext = EAGLContext(api: .openGLES3) else {
-            return nil
-        }
-        
-        let context = CIContext(eaglContext: openGLContext)
-        
-        let ciImage = CIImage(cgImage: cgImage)
-        
-        let filter = CIFilter(name: filterEffect.filterName)
-        
-        filter?.setValue(ciImage, forKey: kCIInputImageKey )
-        
-        if let filterEffectValue = filterEffect.filterEffectValue, let filterEffectValueName = filterEffect.filterEffectValueName {
-            filter?.setValue(filterEffectValue, forKey: filterEffectValueName)
-        }
-        
-        var filteredImage: UIImage?
-        
-        if let output = filter?.value(forKey: kCIOutputImageKey) as? CIImage,
-           let cgiImageResult = context.createCGImage(output, from: output.extent){
-            filteredImage = UIImage(cgImage: cgiImageResult)
-            
-        }
-        
-        return filteredImage
-    }
-    
-    
-    
     @IBOutlet weak var fontColorButton: UIButton!
-    
-    
     @IBOutlet weak var fontButon: UIButton!
-    
-    
     @IBOutlet var contentView: UIView!
-    
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var imageContainerView: UIView!
-    
     @IBOutlet weak var textLable: UILabel!
-    
     @IBOutlet weak var textField: UITextField!
+    
     public var presentingViewController: UIViewController?
     var originalImage: UIImage?
-    var fontAttributes: [NSAttributedString.Key : NSObject]?
+    var fontAttributes: [NSAttributedString.Key : NSObject?]!
     let photoImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        
         return imageView
     }()
-    
     
     lazy private var cancelButton: UIButton = {
         let button = UIButton(type: .system)
@@ -114,17 +58,64 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
         return button
     }()
     
-    var dropDown = DropDown()
+    struct Filter {
+        let filterName: String
+        var filterEffectValue: Any?
+        var filterEffectValueName:String?
+        
+        init(filterName: String, filterEffectValue: Any?,filterEffectValueName:String?){
+            self.filterName = filterName
+            self.filterEffectValue = filterEffectValue
+            self.filterEffectValueName = filterEffectValueName
+        }
+    }
+    
+    private var dropDownForCrop = DropDown()
+    private var fontMenuDropDown = DropDown()
+    private var fontColorDropDown = DropDown()
+    private var fontColor:UIColor? {
+        didSet {
+            if let color = fontColor {
+            let textFontAttributes = [
+                NSAttributedString.Key.font: selectedFont,
+                NSAttributedString.Key.foregroundColor: fontColor,
+            ]
+                self.fontAttributes = textFontAttributes }
+            else {
+                fontColor = .white
+                let textFontAttributes = [
+                    NSAttributedString.Key.font: selectedFont,
+                    NSAttributedString.Key.foregroundColor: fontColor,
+                ]
+                self.fontAttributes = textFontAttributes
+            }
+        }
+    }
+    private var selectedFont: UIFont? {
+        didSet {
+            if let font = selectedFont {
+            let textFontAttributes = [
+                NSAttributedString.Key.font: selectedFont,
+                NSAttributedString.Key.foregroundColor: fontColor,
+            ]
+                self.fontAttributes = textFontAttributes }
+            else {
+                selectedFont = UIFont.systemFont(ofSize: 50.0, weight: .light)
+                let textFontAttributes = [
+                    NSAttributedString.Key.font: selectedFont,
+                    NSAttributedString.Key.foregroundColor: fontColor,
+                ]
+                self.fontAttributes = textFontAttributes
+            }
+        }
+    }
     private var initialCenter: CGPoint = .zero
     var photoUsageDelegate: PhotoUsageDelegate?
     var presetingViewController: UIViewController?
     init(frame: CGRect, presentingViewController: UIViewController?) {
         super.init(frame: frame)
         self.presentingViewController = presentingViewController
-        //        addSubviews(photoImageView, cancelButton, savePhotoButton)
         customInit()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -140,7 +131,7 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         setupContainerView()
-        dropDownCropMenuSetUp()
+        dropDownMenuSetup()
         originalImage = photoImageView.image
     }
     
@@ -159,9 +150,6 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
                 do {
                     try PHPhotoLibrary.shared().performChangesAndWait {
                         PHAssetChangeRequest.creationRequestForAsset(from: previewImage)
-                        //                        print("photo has saved in library...")
-                        
-                        
                         self.photoUsageDelegate?.useCapturedPhoto(image: previewImage)
                         self.handleCancel()
                     }
@@ -176,8 +164,6 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
     }
     
     @IBAction func addTextButtonPressed(_ sender: UIButton) {
-        //        initialCenter = textLable.center
-        
         if textLable.text != nil , photoImageView.image != nil {
             photoImageView.image = textToImage(drawText: textLable.text!, inImage: photoImageView.image!, atPoint: textLable.center)
         }
@@ -187,7 +173,7 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
     
     
     @IBAction func filterButtonPressed(_ sender: UIButton) {
-        dropDown.show()
+        dropDownForCrop.show()
     }
     
     @IBAction func cropButtonPressed(_ sender: UIButton) {
@@ -197,16 +183,15 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
         
     }
     
-    
     @IBAction func fontButtonPressed(_ sender: UIButton) {
+        
+        fontMenuDropDown.show()
     }
-    
     
     @IBAction func fontColorButtonPressed(_ sender: UIButton) {
         
-        
+        fontColorDropDown.show()
     }
-    
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         // 'image' is the newly cropped version of the original image
@@ -223,7 +208,7 @@ class PhotoPreviewView2: UIView, CropViewControllerDelegate {
         let cropViewController = CropViewController(image: image)
         cropViewController.delegate = self
         presentingViewController?.present(cropViewController, animated: true, completion: nil)
-        //            presentingViewController?.navigationController?.pushViewController(cropViewController, animated: true)
+
     }
     
 }
@@ -232,8 +217,8 @@ private extension PhotoPreviewView2  {
     
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         // Setup the font specific variables
-        var textColor = UIColor.white
-        var textFont = UIFont(name: "Helvetica Bold", size: 48)!
+        var textColor = self.fontColor
+        var textFont = self.selectedFont
         
         // Setup the image context using the passed image
         let scale = UIScreen.main.scale
@@ -265,7 +250,6 @@ private extension PhotoPreviewView2  {
     }
     
     func setupContainerView() {
-        
         self.imageContainerView.addSubview(photoImageView)
         self.imageContainerView.addSubview(cancelButton)
         self.imageContainerView.addSubview(savePhotoButton)
@@ -301,7 +285,6 @@ private extension PhotoPreviewView2  {
         }
     }
     
-    
     func showAlert(message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -315,15 +298,14 @@ private extension PhotoPreviewView2  {
     
     private func dropDownCropMenuSetUp() {
         dropDownAppearance()
-        DropDown.appearance().selectionBackgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
-        dropDown.dataSource = ["Sepia", "Photo Transfer", "Noir","Blur","Clear Effect"]
-        dropDown.anchorView =  filterButton
-        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.direction = .bottom
+        dropDownForCrop.dataSource = ["Sepia", "Photo Transfer", "Noir","Blur","Clear Effect"]
+        dropDownForCrop.anchorView =  filterButton
+        dropDownForCrop.bottomOffset = CGPoint(x: 0, y:(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        dropDownForCrop.topOffset = CGPoint(x: 0, y:-(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        dropDownForCrop.direction = .bottom
         
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+        dropDownForCrop.selectionAction = { [unowned self] (index: Int, item: String) in
             switch index {
             case 0: print("at index: \(index) ", item)
                 
@@ -347,8 +329,6 @@ private extension PhotoPreviewView2  {
                 let image = getImage()
                 photoImageView.image = applyFilterTo(image: image,
                                                      filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0, filterEffectValueName: kCIInputRadiusKey))
-                
-                
             case 4: print("at index: \(index) ", item)
                 
                 photoImageView.image = getImage()
@@ -360,47 +340,23 @@ private extension PhotoPreviewView2  {
         
     }
     
-    
     private func dropDownFontMenuSetUp() {
         
         dropDownAppearance()
-        // Do any additional setup after loading the view.
-        dropDown.dataSource = ["Light", "Medium", "Bold"]
-        dropDown.anchorView =  filterButton
-        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.direction = .bottom
+        fontMenuDropDown.dataSource = ["Light", "Medium", "Bold"]
+        fontMenuDropDown.anchorView =  fontButon
+        fontMenuDropDown.bottomOffset = CGPoint(x: 0, y:(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        fontMenuDropDown.topOffset = CGPoint(x: 0, y:-(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        fontMenuDropDown.direction = .top
         
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+        fontMenuDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             switch index {
             case 0: print("at index: \(index) ", item)
-                
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image, filterEffect: Filter(filterName: "CISepiaTone", filterEffectValue: 0.70, filterEffectValueName: kCIInputIntensityKey))
-                
-                
+                self.selectedFont = UIFont.systemFont(ofSize: 50.0, weight: .light)
             case 1: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIPhotoEffectProcess", filterEffectValue: nil, filterEffectValueName: nil))
-                
+                self.selectedFont = UIFont.systemFont(ofSize: 50.0, weight: .medium)
             case 2: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIPhotoEffectNoir",
-                                                                          filterEffectValue: nil,
-                                                                          filterEffectValueName: nil))
-                
-            case 3: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0, filterEffectValueName: kCIInputRadiusKey))
-                
-                
-            case 4: print("at index: \(index) ", item)
-                
-                photoImageView.image = getImage()
-                
+                self.selectedFont = UIFont.systemFont(ofSize: 50.0, weight: .bold)
             default:
                 break
             }
@@ -413,47 +369,35 @@ private extension PhotoPreviewView2  {
         
         dropDownAppearance()
         // Do any additional setup after loading the view.
-        dropDown.dataSource = ["Green", "Blue", "Yellow","White","Black"]
-        dropDown.anchorView =  filterButton
-        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.direction = .bottom
-        
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+        fontColorDropDown.dataSource = ["Green", "Blue", "Yellow","White","Black"]
+        fontColorDropDown.anchorView =  fontColorButton
+        fontColorDropDown.bottomOffset = CGPoint(x: 0, y:(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        fontColorDropDown.topOffset = CGPoint(x: 0, y:-(dropDownForCrop.anchorView?.plainView.bounds.height)!)
+        fontColorDropDown.direction = .top
+        fontColorDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             switch index {
             case 0: print("at index: \(index) ", item)
                 
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image, filterEffect: Filter(filterName: "CISepiaTone", filterEffectValue: 0.70, filterEffectValueName: kCIInputIntensityKey))
-                
-                
             case 1: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIPhotoEffectProcess", filterEffectValue: nil, filterEffectValueName: nil))
                 
             case 2: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIPhotoEffectNoir",
-                                                                          filterEffectValue: nil,
-                                                                          filterEffectValueName: nil))
                 
             case 3: print("at index: \(index) ", item)
-                let image = getImage()
-                photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0, filterEffectValueName: kCIInputRadiusKey))
-                
                 
             case 4: print("at index: \(index) ", item)
                 
-                photoImageView.image = getImage()
                 
             default:
                 break
             }
         }
         
+    }
+    
+    func dropDownMenuSetup() {
+        dropDownCropMenuSetUp()
+        dropDownFontMenuSetUp()
+        dropDownFontColorMenuSetUp()
     }
     
     func dropDownAppearance() {
@@ -476,8 +420,39 @@ private extension PhotoPreviewView2  {
         
         return image
     }
+    
+    func applyFilterTo(image: UIImage, filterEffect: Filter) -> UIImage? {
+        
+        guard let cgImage = image.cgImage, let openGLContext = EAGLContext(api: .openGLES3) else {
+            return nil
+        }
+        
+        let context = CIContext(eaglContext: openGLContext)
+        
+        let ciImage = CIImage(cgImage: cgImage)
+        
+        let filter = CIFilter(name: filterEffect.filterName)
+        
+        filter?.setValue(ciImage, forKey: kCIInputImageKey )
+        
+        if let filterEffectValue = filterEffect.filterEffectValue, let filterEffectValueName = filterEffect.filterEffectValueName {
+            filter?.setValue(filterEffectValue, forKey: filterEffectValueName)
+        }
+        
+        var filteredImage: UIImage?
+        
+        if let output = filter?.value(forKey: kCIOutputImageKey) as? CIImage,
+           let cgiImageResult = context.createCGImage(output, from: output.extent){
+            filteredImage = UIImage(cgImage: cgiImageResult)
+            
+        }
+        
+        return filteredImage
+    }
+    
+    
+    
 }
-
 
 extension PhotoPreviewView2: UITextFieldDelegate {
     
