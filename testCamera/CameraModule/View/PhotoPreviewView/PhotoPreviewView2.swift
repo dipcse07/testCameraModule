@@ -217,18 +217,15 @@ private extension PhotoPreviewView2  {
     
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         // Setup the font specific variables
-        var textColor = self.fontColor
-        var textFont = self.selectedFont
+//        var textColor = self.fontColor
+//        var textFont = self.selectedFont
         
         // Setup the image context using the passed image
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
         
         // Setup the font attributes that will be later used to dictate how the text should be drawn
-        let textFontAttributes = [
-            NSAttributedString.Key.font: textFont,
-            NSAttributedString.Key.foregroundColor: textColor,
-        ]
+        let textFontAttributes = self.fontAttributes
         
         // Put the image into a rectangle as large as the original image
         image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
@@ -316,7 +313,8 @@ private extension PhotoPreviewView2  {
             case 1: print("at index: \(index) ", item)
                 let image = getImage()
                 photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIPhotoEffectProcess", filterEffectValue: nil, filterEffectValueName: nil))
+                                                     filterEffect: Filter(filterName: "CIPhotoEffectProcess", filterEffectValue: nil,
+                                                                          filterEffectValueName: nil))
                 
             case 2: print("at index: \(index) ", item)
                 let image = getImage()
@@ -328,9 +326,9 @@ private extension PhotoPreviewView2  {
             case 3: print("at index: \(index) ", item)
                 let image = getImage()
                 photoImageView.image = applyFilterTo(image: image,
-                                                     filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0, filterEffectValueName: kCIInputRadiusKey))
+                                                     filterEffect: Filter(filterName: "CIGaussianBlur", filterEffectValue: 8.0,
+                                                                          filterEffectValueName: kCIInputRadiusKey))
             case 4: print("at index: \(index) ", item)
-                
                 photoImageView.image = getImage()
                 
             default:
@@ -361,10 +359,8 @@ private extension PhotoPreviewView2  {
                 break
             }
         }
-        
     }
-    
-    
+
     private func dropDownFontColorMenuSetUp() {
         
         dropDownAppearance()
@@ -377,15 +373,19 @@ private extension PhotoPreviewView2  {
         fontColorDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             switch index {
             case 0: print("at index: \(index) ", item)
+                self.fontColor = .green
                 
             case 1: print("at index: \(index) ", item)
+                self.fontColor = .blue
                 
             case 2: print("at index: \(index) ", item)
+                self.fontColor = .yellow
                 
             case 3: print("at index: \(index) ", item)
+                self.fontColor = .white
                 
             case 4: print("at index: \(index) ", item)
-                
+                self.fontColor = .black
                 
             default:
                 break
@@ -444,21 +444,18 @@ private extension PhotoPreviewView2  {
         if let output = filter?.value(forKey: kCIOutputImageKey) as? CIImage,
            let cgiImageResult = context.createCGImage(output, from: output.extent){
             filteredImage = UIImage(cgImage: cgiImageResult)
-            
         }
         
         return filteredImage
     }
-    
-    
-    
 }
 
 extension PhotoPreviewView2: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        let text = textField.text
+        let attributedString = NSAttributedString(string: text!, attributes: self.fontAttributes)
         textLable.text = textField.text
-        
         print(textField.text)
     }
     
