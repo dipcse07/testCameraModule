@@ -175,7 +175,10 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)!
         do {
             let audioInput = try AVCaptureDeviceInput(device: audioDevice)
-            self.captureSession.addInput(audioInput)
+            if captureSession.canAddInput(audioInput){
+                self.captureSession.addInput(audioInput)
+            }
+            
         } catch {
             print("Unable to add audio device to the recording.")
         }
