@@ -8,7 +8,24 @@
 import UIKit
 import AVFoundation
 import Photos
+
+protocol CapturedViewControllerDelegate: AnyObject {
+    func caupturedVideoOrImage(videoUrl: URL?, image: UIImage?)
+    func cancelButtonPressed()
+}
+
+@available(iOS 13.0, *)
 class CaptureViewController: UIViewController {
+    
+    internal static func instantiate() -> UIViewController? {
+        
+        let nibName = String(describing: CaptureViewController.self)
+        let bundle = Bundle.main
+        let viewController = CaptureViewController(nibName: nibName, bundle: bundle)
+        viewController.modalPresentationStyle = .fullScreen
+        //viewController.delegate = delegate
+        return viewController
+    }
     
     @IBOutlet weak var videoPreviewView: VideoPreviewView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -24,14 +41,13 @@ class CaptureViewController: UIViewController {
     @IBOutlet weak var toggleCaptureButtonView: ToggleCaptureButtonView!
     @IBOutlet private weak var overlayView: UIView!
     
-    
     private var captureSessionController = CaptureSessionController()
     private let photoOutput = AVCapturePhotoOutput()
     private var imagePickerController = UIImagePickerController()
 
     private var portraitConstraints = [NSLayoutConstraint]()
     private var landscapeConstraints = [NSLayoutConstraint]()
-    private lazy var timerController = TimerController()
+    private lazy var timerController = TimerController.shared
     private var switchZommViewWidthConstraint:NSLayoutConstraint?
     private var switchZoomViewHeightConstraint: NSLayoutConstraint?
     private var shouldHideSwitchZoomView = false
@@ -39,6 +55,7 @@ class CaptureViewController: UIViewController {
     private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
     private var pointOfInterestCompleteWorkItem: DispatchWorkItem?
     private var videoRecordButtonCompletionHandler: ((Bool) -> Void)!
+    var delegate: CapturedViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +70,6 @@ class CaptureViewController: UIViewController {
         self.registerForApplicationStateNotification()
         self.setupRecordButton()
         //setupTimer()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,8 +120,16 @@ class CaptureViewController: UIViewController {
         print(video)
     }
     
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: {
+            self.delegate?.cancelButtonPressed()
+        })
+    }
+
 }
 
+@available(iOS 13.0, *)
 private extension CaptureViewController {
     
     func initConstraints() {
@@ -211,6 +235,7 @@ private extension CaptureViewController {
                 self.setupVideoOrientation()
                 self.setupToggleCameraView()
                 self.setupSwitchZoomView()
+                self.captureSessionController.delegate = self
             }
             else {
                 print("session is nil because capture sessionController is nill")
@@ -379,9 +404,14 @@ private extension CaptureViewController {
         self.pointOfInterestHalfCompletedWorkItem = pointOfInterestHalfCompletedWorkItem
         self.pointOfInterestCompleteWorkItem = pointOfInterestCompletedWorkItem
     }
+    
+    
+    
+    
 }
 
 
+@available(iOS 13.0, *)
 extension CaptureViewController: SwitchZoomViewDelegate {
     func switchZoomTapped(state: ZoomState) {
         captureSessionController.setZoomState(zoomState: state)
@@ -390,6 +420,7 @@ extension CaptureViewController: SwitchZoomViewDelegate {
     
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController: ToggleCameraDelegate {
     func toggleCameraButtonTapped() {
         captureSessionController.toggleCamera(completionHandler: {[weak self]cameraPosition in
@@ -410,6 +441,7 @@ extension CaptureViewController: ToggleCameraDelegate {
     
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController: TorchViewDelegate {
     func torchTapped(torchMode: TorchMode, completionHandler: (Bool) -> Void ) {
         switch torchMode {
@@ -430,6 +462,7 @@ extension CaptureViewController: TorchViewDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController: ToggleCaptureButtonViewDelegate {
     func toggleCaptureButtonTapped(captureMode: CaptureMode, completionHandler: (Bool) -> Void) {
         switch captureMode {
@@ -459,6 +492,7 @@ extension CaptureViewController: ToggleCaptureButtonViewDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController:ImageCaptureViewDelegate {
     func capturedImagedPassed(image: UIImage?) {
         
@@ -469,6 +503,7 @@ extension CaptureViewController:ImageCaptureViewDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController: GalaryViewDelegate {
     
     func galleryButtonTapped() {
@@ -479,26 +514,67 @@ extension CaptureViewController: GalaryViewDelegate {
     }
 }
 
-extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+@available(iOS 13.0, *)
+extension CaptureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoUsageDelegate {
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //            self.galleryButton.contentMode = .scaleAspectFit
             //            self.galleryButton.setImage( pickedImage, for: .normal)
             self.galleryView.setGalleryButtonImage(image: pickedImage)
+         
+            let fixedImage = pickedImage.fixOrientation()
+            let photoPreviewContainer = PhotoPreviewView2(frame: self.view.bounds,
+            presentingViewController: self)
+            photoPreviewContainer.photoImageView.image = fixedImage
+            photoPreviewContainer.photoUsageDelegate = self
+            self.view.addSubview(photoPreviewContainer)
+            self.dismiss(animated: true, completion: nil)
         }
         if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
             print("videoURL:\(String(describing: videoURL))")
+            delegate?.caupturedVideoOrImage(videoUrl: videoURL, image: nil)
+            self.dismiss(animated: true){
+                //self.dismiss(animated: true, completion: nil)
+            }
         }
-        
-        self.dismiss(animated: true, completion: nil)
+       
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
     
+    func useCapturedPhoto(image: UIImage) {
+        print("Got Photo From Library modified")
+        self.delegate?.caupturedVideoOrImage(videoUrl: nil, image: image)
+
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+    
+    func sharePhoto(image: UIImage) {
+        //share the modified code
+    }
+
+}
+@available(iOS 13.0, *)
+extension CaptureViewController: GetModifiedImageOrVideoForCaptureViewController {
+    func getImage(image: UIImage) {
+        print("Got image after modify from capture")
+        delegate?.caupturedVideoOrImage(videoUrl: nil, image: image)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func getVideo(url: URL?) {
+        
+    }
+    
+    
 }
 
+@available(iOS 13.0, *)
 extension CaptureViewController: RecordButtonViewDelegate {
     
     func recordButtonTapped(captureMode: RecordViewState, completionHandler: @escaping (Bool) -> Void) {
@@ -507,10 +583,12 @@ extension CaptureViewController: RecordButtonViewDelegate {
         case .stopped:
             
             timerView.isHidden = false
+            timerView.timerLabel.text = "00:00"
             timerController.setupTimer {[weak self] seconds in
                 guard let self = self else {
                     return
                 }
+                
                 self.timerView.updateTime(seconds: seconds)
                 print(seconds)
             }
@@ -522,11 +600,13 @@ extension CaptureViewController: RecordButtonViewDelegate {
                 }
                 
                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                self.delegate?.caupturedVideoOrImage(videoUrl: url, image: nil)
             }
             self.videoRecordButtonCompletionHandler = completionHandler
             completionHandler(true)
         case .recording:
             timerView.isHidden = true
+            
             timerController.resetTimer()
             
             self.captureSessionController.stopRecording { error in

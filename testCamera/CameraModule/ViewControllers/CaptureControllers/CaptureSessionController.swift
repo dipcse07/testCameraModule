@@ -33,6 +33,12 @@ enum CaptureSessionError: Swift.Error {
 typealias CaptureSessionInitializedCompletionHandler = () -> Void
 typealias CaptureSessionToggleCompletionHandler = (CameraPosition) -> Void
 
+protocol GetModifiedImageOrVideoForCaptureViewController: AnyObject {
+    func getImage(image:UIImage)
+    func getVideo(url: URL?)
+}
+
+@available(iOS 13.0, *)
 class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         
@@ -57,6 +63,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     private var refferedViewController: UIViewController?
     var videoRecordCompletionBlock: ((URL?, Error?) -> Void)?
     var presentingViewController: UIViewController?
+    var delegate: GetModifiedImageOrVideoForCaptureViewController?
 
 //    init(completionHandler: @escaping CaptureSessionInitializedCompletionHandler){
 //        super.init()
@@ -175,10 +182,9 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)!
         do {
             let audioInput = try AVCaptureDeviceInput(device: audioDevice)
-            if captureSession.canAddInput(audioInput){
+            if self.captureSession.canAddInput(audioInput){
                 self.captureSession.addInput(audioInput)
             }
-            
         } catch {
             print("Unable to add audio device to the recording.")
         }
@@ -270,21 +276,28 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
 
 }
 
+@available(iOS 13.0, *)
 private extension CaptureSessionController {
     func getBackVideoCaptureDevice() -> AVCaptureDevice? {
         
-        if let tripleCamera = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back){
-            return tripleCamera
-        }
-        if let dualWidthCamera = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back){
-            return dualWidthCamera
-        }
-        if let dualCamera = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back){
-            return dualCamera
-    }
-        if let wideAngleCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back){
-            print("returning wide angle camera: " + wideAngleCamera.localizedName)
-            return wideAngleCamera
+//        if let tripleCamera = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back){
+//            return tripleCamera
+//        }
+//        if let dualWidthCamera = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back){
+//            return dualWidthCamera
+//        }
+//        if let dualCamera = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back){
+//            return dualCamera
+//    }
+//        if let wideAngleCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back){
+//            print("returning wide angle camera: " + wideAngleCamera.localizedName)
+//            return wideAngleCamera
+//
+//        }
+        
+        if let camera = AVCaptureDevice.default(for: .video){
+            print("returning wide angle camera: " + camera.localizedName)
+            return camera
             
         }
         return nil
@@ -392,6 +405,7 @@ private extension CaptureSessionController {
 }
 
 
+@available(iOS 13.0, *)
 extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
@@ -399,7 +413,7 @@ extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
         let previewImage = UIImage(data: imageData)
         self.captureImage = previewImage
         let fixedImage = previewImage?.fixOrientation()
-        let photoPreviewContainer = PhotoPreviewView2(frame: self.refferedViewController!.view.frame,
+        let photoPreviewContainer = PhotoPreviewView2(frame: self.refferedViewController!.view.bounds,
         presentingViewController: self.presentingViewController)
         photoPreviewContainer.photoImageView.image = fixedImage
         photoPreviewContainer.photoUsageDelegate = self
@@ -409,9 +423,15 @@ extension CaptureSessionController: AVCapturePhotoCaptureDelegate {
 }
 
 
+@available(iOS 13.0, *)
 extension CaptureSessionController: PhotoUsageDelegate {
     func useCapturedPhoto(image: UIImage) {
         print("image ", image)
+        delegate?.getImage(image: image)
+    }
+    
+    func sharePhoto(image: UIImage) {
+        // share the modified code
     }
     
 }

@@ -9,7 +9,7 @@ import Foundation
 
 typealias TimerUpdateHandler = (Int64) -> Void
 class TimerController {
-    
+    static let shared = TimerController()
     private var timer: Timer?
     private var seconds: Int64 = 0
     

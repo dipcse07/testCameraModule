@@ -10,8 +10,8 @@ import UIKit
 class TimerView: UIView {
 
     @IBOutlet private weak var contentView:UIView!
-    @IBOutlet private weak var timerLabel: UILabel!
-    
+    @IBOutlet weak var timerLabel: UILabel!
+    var updatedSecond:String = "00:00"
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -33,6 +33,7 @@ class TimerView: UIView {
     }
     
     func updateTime(seconds: Int64) {
+        
         let timerInterval = TimeInterval(integerLiteral: seconds)
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
@@ -41,7 +42,8 @@ class TimerView: UIView {
         
         let formatedString  = formatter.string(from: timerInterval) ?? "00:00"
     
-        timerLabel.text = formatedString
+        updatedSecond = formatedString
+        timerLabel.text = updatedSecond
     }
     
 

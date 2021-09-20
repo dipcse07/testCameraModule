@@ -2,13 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestMicrophoneAuthorizationView" customModule="testCamera" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestMicrophoneAuthorizationView" customModule="Class_Chat" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="YB4-hr-IcA" id="SYK-fC-RVR"/>
                 <outlet property="actionButtonWidhConstant" destination="dFx-0j-o79" id="ZTO-lK-3fS"/>
@@ -34,7 +35,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-PE-KfZ">
-                            <rect key="frame" x="0.0" y="242" width="374" height="25.5"/>
+                            <rect key="frame" x="0.0" y="242" width="414" height="25.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -67,7 +68,7 @@
                         <constraint firstItem="ndk-PE-KfZ" firstAttribute="centerY" secondItem="OuC-mz-AXI" secondAttribute="centerY" constant="-23.5" id="LSV-Px-YGZ"/>
                         <constraint firstItem="YB4-hr-IcA" firstAttribute="top" secondItem="zD0-uK-eh9" secondAttribute="bottom" constant="30" id="Ov4-ci-cid"/>
                         <constraint firstItem="zD0-uK-eh9" firstAttribute="leading" secondItem="OuC-mz-AXI" secondAttribute="leading" constant="20" id="RQd-2S-NGR"/>
-                        <constraint firstAttribute="trailing" secondItem="ndk-PE-KfZ" secondAttribute="trailing" constant="40" id="ZzX-jc-bLC"/>
+                        <constraint firstAttribute="trailing" secondItem="ndk-PE-KfZ" secondAttribute="trailing" id="ZzX-jc-bLC"/>
                         <constraint firstItem="YB4-hr-IcA" firstAttribute="centerX" secondItem="OuC-mz-AXI" secondAttribute="centerX" id="d7Y-BJ-kpa"/>
                         <constraint firstItem="ndk-PE-KfZ" firstAttribute="top" secondItem="R98-nE-KKL" secondAttribute="bottom" constant="30" id="g7S-p9-4W8"/>
                         <constraint firstItem="R98-nE-KKL" firstAttribute="centerX" secondItem="OuC-mz-AXI" secondAttribute="centerX" id="get-Pq-40H"/>
@@ -84,7 +85,7 @@
                 <constraint firstItem="OuC-mz-AXI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="LOX-qx-crF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-12" y="33"/>
+            <point key="canvasLocation" x="-13.043478260869566" y="32.8125"/>
         </view>
     </objects>
     <resources>

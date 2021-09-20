@@ -2,13 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestPhotoLibraryAuthView" customModule="testCamera" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestPhotoLibraryAuthView" customModule="Class_Chat" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="Dmm-iQ-5GD" id="JkD-N2-w2z"/>
                 <outlet property="actionButtonWidhConstant" destination="Fzt-Gd-nK6" id="GbV-m8-oVh"/>
@@ -34,8 +35,8 @@
                                 <constraint firstAttribute="height" constant="60" id="rF7-Qk-u6s"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0v-g3-wLo">
-                            <rect key="frame" x="0.0" y="264" width="374" height="25.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Library Authorization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0v-g3-wLo">
+                            <rect key="frame" x="0.0" y="264" width="414" height="25.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -70,7 +71,7 @@
                         <constraint firstItem="C73-63-EiT" firstAttribute="top" secondItem="p0v-g3-wLo" secondAttribute="bottom" constant="16" id="fI1-i2-ni7"/>
                         <constraint firstItem="C73-63-EiT" firstAttribute="leading" secondItem="y7m-0M-KFB" secondAttribute="leading" constant="20" id="hkg-eV-GJc"/>
                         <constraint firstItem="p0v-g3-wLo" firstAttribute="centerY" secondItem="y7m-0M-KFB" secondAttribute="centerY" constant="-23.5" id="jTb-kT-DsW"/>
-                        <constraint firstAttribute="trailing" secondItem="p0v-g3-wLo" secondAttribute="trailing" constant="40" id="nzi-ok-gK3"/>
+                        <constraint firstAttribute="trailing" secondItem="p0v-g3-wLo" secondAttribute="trailing" id="nzi-ok-gK3"/>
                         <constraint firstItem="p0v-g3-wLo" firstAttribute="top" secondItem="gTx-CI-kbJ" secondAttribute="bottom" constant="30" id="pBJ-tf-Y7y"/>
                         <constraint firstItem="Dmm-iQ-5GD" firstAttribute="top" secondItem="C73-63-EiT" secondAttribute="bottom" constant="30" id="vbz-Yd-uar"/>
                     </constraints>

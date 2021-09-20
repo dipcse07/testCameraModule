@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol CCMediaPickerDelegate: AnyObject {
+    func caupturedVideoOrImage(videoUrl: URL?, image: UIImage?)
+}
+
+@available(iOS 13.0, *)
 class LaunchViewController: UIViewController {
     
     internal static func instantiate() -> UIViewController? {
@@ -14,7 +19,8 @@ class LaunchViewController: UIViewController {
         let nibName = String(describing: LaunchViewController.self)
         let bundle = Bundle.main
         let launchViewController = LaunchViewController(nibName: nibName, bundle: bundle)
-        
+        launchViewController.modalPresentationStyle = .fullScreen
+        //launchViewController.delegate = delegate
         return launchViewController
     }
     
@@ -39,7 +45,7 @@ class LaunchViewController: UIViewController {
             setupViewForNextAuthRequest()
         }
     }
-    
+    var delegate: CCMediaPickerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewForNextAuthRequest()
@@ -82,14 +88,18 @@ class LaunchViewController: UIViewController {
         
         print("Show Capture View Controller")
         DispatchQueue.main.async {
-            CameraModuleSetup.loadCaptureViewController()
+
+            let captureviewController = CaptureViewController.instantiate()
+            self.present(captureviewController!, animated: true, completion: {
+        
+            })
         }
 
     }
     
-    
 }
 
+@available(iOS 13.0, *)
 private extension LaunchViewController {
     
     func addRequestCameraAuthorizationView() {
@@ -142,6 +152,7 @@ private extension LaunchViewController {
 
 //MARK:- Extension For Microphone Access and Controll
 
+@available(iOS 13.0, *)
 private extension LaunchViewController {
     
     func addRequestMicroPhoneAuthorizationView() {
@@ -189,12 +200,14 @@ private extension LaunchViewController {
             self.setupViewForNextAuthRequest()
         })
         
+        
     }
     
 }
 
 
 //MARK:- PhotoLibrary Authorization
+@available(iOS 13.0, *)
 private extension LaunchViewController {
     
     func addRequestPhotoLibraryAuthorizationView() {
@@ -246,9 +259,8 @@ private extension LaunchViewController {
     
 }
 
-
-
 //MARK:- Authorization Delegates
+@available(iOS 13.0, *)
 extension LaunchViewController: RequestCameraAuthorizationViewDelegate, RequestMicrophoneAuthorizationViewDelegate, RequestPhotoLibraryAuthorizationViewDelegate{
     
     //MARK:- Request Camera View Delegate
@@ -299,5 +311,24 @@ extension LaunchViewController: RequestCameraAuthorizationViewDelegate, RequestM
             openSettings()
             return
         }
+    }
+}
+
+@available(iOS 13.0, *)
+extension LaunchViewController: CapturedViewControllerDelegate {
+    func caupturedVideoOrImage(videoUrl: URL?, image: UIImage?) {
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else {return}
+            
+            print("launch View Dissmissed")
+            self.dismiss(animated: true) {
+                self.delegate?.caupturedVideoOrImage(videoUrl: videoUrl, image: image)
+            }
+            
+        }
+    }
+    
+    func cancelButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -2,13 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="testCamera" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="Class_Chat" customModuleProvider="target">
             <connections>
                 <outlet property="alertView" destination="nec-pI-30w" id="9HX-1d-Sbl"/>
                 <outlet property="galleryView" destination="alJ-nu-rss" id="9D4-yE-jiy"/>
@@ -31,7 +33,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRn-Ci-qNV" userLabel="Video Preview View" customClass="VideoPreviewView" customModule="testCamera" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRn-Ci-qNV" userLabel="Video Preview View" customClass="VideoPreviewView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -44,14 +46,14 @@
                     <blurEffect style="regular"/>
                 </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ym7-EM-bGG" userLabel="Overlay View">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="igH-NF-8Di" appends="YES" id="5NN-V2-UhB"/>
                     </connections>
                 </view>
-                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-Gy-wO3" userLabel="Timer View" customClass="TimerView" customModule="testCamera" customModuleProvider="target">
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-Gy-wO3" userLabel="Timer View" customClass="TimerView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="157" y="74" width="100" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -64,7 +66,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccF-e5-Yq9" userLabel="Torch View" customClass="TorchView" customModule="testCamera" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccF-e5-Yq9" userLabel="Torch View" customClass="TorchView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="30" y="74" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -72,7 +74,7 @@
                         <constraint firstAttribute="height" constant="60" id="y1p-b2-aX8"/>
                     </constraints>
                 </view>
-                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nec-pI-30w" userLabel="Alert View" customClass="AlertView" customModule="testCamera" customModuleProvider="target">
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nec-pI-30w" userLabel="Alert View" customClass="AlertView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="107" y="602" width="200" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -80,7 +82,7 @@
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="YhT-G2-RhU"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-b4-6mj" customClass="SwitchZoomView" customModule="testCamera" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-b4-6mj" customClass="SwitchZoomView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="127" y="692" width="160" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -88,7 +90,7 @@
                         <constraint firstAttribute="width" constant="160" placeholder="YES" id="pSc-2d-0m4"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="testCamera" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-gM-kEJ" customClass="ToggleCameraView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="324" y="762" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -96,7 +98,7 @@
                         <constraint firstAttribute="height" constant="60" id="xak-Xz-gwl"/>
                     </constraints>
                 </view>
-                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ItX-jK-DXv" customClass="PointOfInterest" customModule="testCamera" customModuleProvider="target">
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ItX-jK-DXv" customClass="PointOfInterest" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="167" y="408" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -104,7 +106,7 @@
                         <constraint firstAttribute="width" constant="80" id="ANc-B2-QlN"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfR-EA-r2W" userLabel="Toggle Capture Mode View" customClass="ToggleCaptureButtonView" customModule="testCamera" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfR-EA-r2W" userLabel="Toggle Capture Mode View" customClass="ToggleCaptureButtonView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="89" y="772" width="70" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -112,7 +114,7 @@
                         <constraint firstAttribute="width" constant="70" id="Sfs-D4-eZO"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="867-Kt-pPM" userLabel="Record View" customClass="RecordView" customModule="testCamera" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="867-Kt-pPM" userLabel="Record View" customClass="RecordView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="167" y="752" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -120,7 +122,7 @@
                         <constraint firstAttribute="width" constant="80" id="fBB-OH-5gX"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alJ-nu-rss" userLabel="GalleryView" customClass="GalleryView" customModule="testCamera" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alJ-nu-rss" userLabel="GalleryView" customClass="GalleryView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="29" y="762" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -128,7 +130,23 @@
                         <constraint firstAttribute="width" constant="60" id="zxy-bT-MGQ"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-cy-4SV" userLabel="Image Capture View" customClass="ImageCaptureView" customModule="testCamera" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5r-qb-hjB">
+                    <rect key="frame" x="336" y="94" width="58" height="28"/>
+                    <color key="backgroundColor" name="BackgroundAlpha60"/>
+                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" name="Selected"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="NdH-IP-E8A"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-cy-4SV" userLabel="Image Capture View" customClass="ImageCaptureView" customModule="Class_Chat" customModuleProvider="target">
                     <rect key="frame" x="167" y="752" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -144,6 +162,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zzv-gM-kEJ" secondAttribute="trailing" constant="30" placeholder="YES" id="AjX-AM-yAr"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="DfV-9j-2Hg"/>
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F1Y-o6-Z3u"/>
+                <constraint firstItem="X5r-qb-hjB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="Hiq-Cx-4LY"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JSo-yB-dJH"/>
                 <constraint firstAttribute="bottom" secondItem="wxY-12-Ibi" secondAttribute="bottom" id="KNV-dZ-9MN"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="leading" secondItem="JfR-EA-r2W" secondAttribute="trailing" constant="8" id="LKY-MD-Led"/>
@@ -157,15 +176,16 @@
                 <constraint firstItem="ccF-e5-Yq9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="XWO-ea-547"/>
                 <constraint firstItem="7Ut-cy-4SV" firstAttribute="top" secondItem="867-Kt-pPM" secondAttribute="top" id="YIv-1q-vrB"/>
                 <constraint firstItem="ItX-jK-DXv" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" placeholder="YES" id="bI7-Zm-L93"/>
+                <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="byz-oY-5eH"/>
                 <constraint firstItem="7Ut-cy-4SV" firstAttribute="trailing" secondItem="867-Kt-pPM" secondAttribute="trailing" id="cDC-kn-yl4"/>
-                <constraint firstItem="Ym7-EM-bGG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dcD-J3-VKS"/>
                 <constraint firstItem="867-Kt-pPM" firstAttribute="centerY" secondItem="Zzv-gM-kEJ" secondAttribute="centerY" placeholder="YES" id="eTx-wE-9mV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X5r-qb-hjB" secondAttribute="trailing" constant="20" id="goA-Hf-L06"/>
                 <constraint firstItem="FnV-b4-6mj" firstAttribute="top" secondItem="nec-pI-30w" secondAttribute="bottom" constant="30" id="hR4-n9-nE9"/>
+                <constraint firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="hcF-nJ-x5h"/>
                 <constraint firstItem="JfR-EA-r2W" firstAttribute="leading" secondItem="alJ-nu-rss" secondAttribute="trailing" id="mF3-6X-Alq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="alJ-nu-rss" secondAttribute="bottom" constant="40" id="mRG-ID-4LW"/>
                 <constraint firstItem="nec-pI-30w" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nUG-yk-Q9L"/>
                 <constraint firstItem="7Ut-cy-4SV" firstAttribute="bottom" secondItem="867-Kt-pPM" secondAttribute="bottom" id="ndA-Gi-Acp"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ym7-EM-bGG" secondAttribute="bottom" id="obB-Ei-mVw"/>
                 <constraint firstItem="ccF-e5-Yq9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="ppF-ew-00J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ym7-EM-bGG" secondAttribute="trailing" id="sc7-rj-AZn"/>
                 <constraint firstItem="wxY-12-Ibi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRW-Cg-9Ly"/>
@@ -180,6 +200,12 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <namedColor name="BackgroundAlpha60">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Selected">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -26,6 +26,13 @@
 	<string>Requires Microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Requires Photo Library</string>
+    <key>UIAppFonts</key>
+    <array>
+        <string>Lobster 1.4.otf</string>
+        <string>Lobster-Regular.ttf</string>
+        <string>Roboto-Medium.ttf</string>
+        <string>Roboto-Regular.ttf</string>
+    </array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
